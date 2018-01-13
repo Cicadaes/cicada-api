@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main/index.js",
+  "scripts": {
+    "start": "nodemon ./main/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "cicModules": [
+    "../modules/express"
+  ],
+  "devDependencies": {
+    "express": "^4.16.2",
+    "nodemon": "^1.14.11"
+  }
+}
