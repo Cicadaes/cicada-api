@@ -4,16 +4,20 @@ module.exports = class Cic {
      * @param {Object} api 
      * @param {Object} pkg 
      */
-    constructor(api, pkg) {
+    constructor(main, api, pkg, config) {
+        this.main = main;
         this.api = api;
         this.pkg = pkg;
+        this.config = config;
 
         this.initModuleContainers();
         this.initExternalModules();
     }
 
     initModuleContainers() {
-        this.controllers = this.initModuleContainer(this.api.controllers);
+        const controllers = Object.assign({}, this.main.controllers, this.api.controllers);
+
+        this.controllers = this.initModuleContainer(controllers);
     }
 
     initModuleContainer(modules) {
@@ -42,12 +46,5 @@ module.exports = class Cic {
      */
     initModule(Module) {
         return new Module(this);
-    }
-
-    /**
-     * Getter by app.config return api.config
-     */
-    get config() {
-        return this.api.config;
     }
 }

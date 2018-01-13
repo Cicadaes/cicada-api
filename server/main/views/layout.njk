@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block header %}
+        {% include "includes/header.njk" %}
+    {% endblock %}
+    <title>{{ title }}</title>
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+
+    {% block footer %}
+        {% include "includes/footer.njk" %}
+    {% endblock %}
+</body>
+</html>

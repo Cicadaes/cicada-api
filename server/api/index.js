@@ -1,2 +1,2 @@
-exports.config = require('./config');
+exports.routes = require('./routes');
 exports.controllers = require('./controllers');
