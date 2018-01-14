@@ -1,6 +1,6 @@
 const Controller = require('../../lib/base/controller');
 
-module.exports = class UserController extends Controller {
+module.exports = class ApiUserController extends Controller {
     // constructor(app) {
     //     super(app);
     // }

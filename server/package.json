@@ -12,7 +12,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "express-validator": "^4.3.0",
     "nodemon": "^1.14.11",
     "nunjucks": "^3.0.1",
     "passport": "^0.4.0",

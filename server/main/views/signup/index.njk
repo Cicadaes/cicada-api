@@ -8,23 +8,29 @@
                         <h2>Sign up</h2>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" method="POST" action="/signup">
                             <div class="form-group">
                                 <label for="username" class="col-md-2 control-label">Username</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control input-lg" id="username" placeholder="Username">
+                                    <input type="text" class="form-control input-lg" name="username" placeholder="Username">
                                 </div>
                             </div>
                             <div class="form-group">
-                                    <label for="email" class="col-md-2 control-label">Email</label>
-                                    <div class="col-md-10">
-                                        <input type="text" class="form-control input-lg" id="email" placeholder="Email">
-                                    </div>
+                                <label for="email" class="col-md-2 control-label">Email</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control input-lg" name="email" placeholder="Email">
                                 </div>
+                            </div>
                             <div class="form-group">
                                 <label for="password" class="col-md-2 control-label">Password</label>
                                 <div class="col-md-10">
-                                    <input type="password" class="form-control input-lg" id="password" placeholder="Password">
+                                    <input type="password" class="form-control input-lg" name="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword" class="col-md-2 control-label">Confirm password</label>
+                                <div class="col-md-10">
+                                    <input type="password" class="form-control input-lg" name="confirmPassword" placeholder="Confirm password">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -35,7 +41,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-
+                        Already have an account?
+                        <a href="/login">Log in</a>
                     </div>
                 </div>
             </div>

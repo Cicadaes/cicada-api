@@ -14,5 +14,10 @@ module.exports = [
         path: '/signup',
         method: 'GET',
         action: 'UserController.getSignup'
+    },
+    {
+        path: '/signup',
+        method: 'POST',
+        action: 'UserController.postSignup'
     }
 ];
