@@ -16,9 +16,11 @@ module.exports = class App {
     }
 
     initModuleContainers() {
+        const middlewares = Object.assign({}, this.main.middlewares);
         const controllers = Object.assign({}, this.main.controllers, this.api.controllers);
         const models = Object.assign({}, this.main.models);
 
+        this.middlewares = this.initModuleContainer(middlewares);
         this.controllers = this.initModuleContainer(controllers);
         this.schames = this.initModuleContainer(models);
     }

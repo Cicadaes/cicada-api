@@ -1,1 +1,1 @@
-exports.UserController = require('./user.controller');
+exports.ApiUserController = require('./api.user.controller');

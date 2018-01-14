@@ -2,16 +2,17 @@ module.exports = [
     {
         path: '/',
         method: 'GET',
-        action: 'HomeController.index'
+        action: 'HomeController.index',
+        interceptors: ['AuthMiddleware.isAuthenticated']
     },
     {
         path: '/login',
         method: 'GET',
-        action: 'LoginController.index'
+        action: 'UserController.getLogin'
     },
     {
         path: '/signup',
         method: 'GET',
-        action: 'SignupController.index'
+        action: 'UserController.getSignup'
     }
 ];

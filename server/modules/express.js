@@ -1,6 +1,7 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 const path = require('path');
+const passport = require('passport');
 
 const BaseModule = require('../lib/base/module');
 
@@ -12,6 +13,8 @@ module.exports = class ExpressModule extends BaseModule {
         this.express = express();
         // Init view and engine
         this.initViews();
+        // Passport
+        this.express.use(passport.initialize());
         // Static i.e., js,css,font
         this.express.use(express.static(path.join(__dirname, '../', 'static')));
         // Load routes
@@ -37,9 +40,30 @@ module.exports = class ExpressModule extends BaseModule {
         const routes = mainRoutes.concat(apiRoutes);
 
         routes.forEach(route => {
-            router[route.method.toLowerCase()](route.path, this.getAction(route.action));
+            if (route.interceptors) {
+                router[route.method.toLowerCase()](route.path, this.getInterceptors(route.interceptors), this.getAction(route.action));
+            } else {
+                router[route.method.toLowerCase()](route.path, this.getAction(route.action));
+            }
         });
         this.express.use('', router);
+    }
+
+    getInterceptors(interceptors) {
+        let middlewares = this.app.middlewares;
+        let methods;
+        let parent = null;
+        let wapper = [];
+
+        interceptors.forEach((interceptor) => {
+            methods = interceptor.split('.');
+            methods.forEach((method) => {
+                parent = middlewares;
+                middlewares = middlewares[method];
+            });
+            wapper.push(middlewares.bind(parent));
+        });
+        return wapper;
     }
 
     getAction(action) {
