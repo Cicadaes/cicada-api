@@ -12,7 +12,7 @@ module.exports = class HomeController extends Controller {
         // });
         this.app.orm.user.find({}).then((records) => {
             res.render('home/index', {
-                title: 'Cicada API',
+                title: 'Mock API',
                 users: records
             });
         });

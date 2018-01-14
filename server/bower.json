@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "description": "",
+  "main": "lib/index.js",
+  "authors": [
+
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Cicadaes/cicada",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

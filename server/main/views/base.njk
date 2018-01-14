@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block header %}
+        {% include "includes/header.njk" %}
+    {% endblock %}
+    <title>{{ title }}</title>
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+
+    {% block footer %}
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="/jquery/dist/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+    {% endblock %}
+</body>
+</html>

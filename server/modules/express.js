@@ -10,7 +10,11 @@ module.exports = class ExpressModule extends BaseModule {
         const port = this.app.config.port;
 
         this.express = express();
+        // Init view and engine
         this.initViews();
+        // Static i.e., js,css,font
+        this.express.use(express.static(path.join(__dirname, '../', 'static')));
+        // Load routes
         this.initRoutes();
         this.express.listen(port, function () {
             console.log(`Server listening on port: ${port}`);
