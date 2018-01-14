@@ -4,19 +4,19 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "start": "node --inspect=5858 --inspect-brk ./lib/index.js",
+    "start": "nodemon ./lib/index.js",
+    "debug": "node --inspect=5858 --inspect-brk ./lib/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "cicModules": [
-    "../modules/express"
-  ],
   "devDependencies": {
     "express": "^4.16.2",
     "nodemon": "^1.14.11",
     "nunjucks": "^3.0.1",
-    "rc": "^1.2.3"
+    "rc": "^1.2.3",
+    "sails-disk": "^0.10.10",
+    "waterline": "^0.10.31"
   }
 }

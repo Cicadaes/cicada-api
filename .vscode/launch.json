@@ -15,7 +15,7 @@
             },
             "runtimeArgs": [
                 "run-script",
-                "start"
+                "debug"
             ],
             "port": 5858
         },

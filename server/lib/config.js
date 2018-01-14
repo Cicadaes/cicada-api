@@ -1,4 +1,5 @@
 const rc = require('rc');
+const sailsDisk = require('sails-disk');
 
 module.exports = class Config {
     constructor() {
@@ -12,7 +13,17 @@ module.exports = class Config {
 
     _default() {
         return {
-            port: 3030
+            port: 3030,
+            databases: {
+                adapters: {
+                    'sails-disk': sailsDisk
+                },
+                connections: {
+                    'local-disk': {
+                        adapter: 'sails-disk'
+                    }
+                }
+            }
         };
     }
 }

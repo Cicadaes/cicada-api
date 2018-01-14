@@ -1,13 +1,14 @@
-module.exports = class Cic {
+const path = require('path');
+
+module.exports = class App {
     /**
      * Constructor, initialize some stuff, e.g. controller and models
      * @param {Object} api 
      * @param {Object} pkg 
      */
-    constructor(main, api, pkg, config) {
+    constructor(main, api, config) {
         this.main = main;
         this.api = api;
-        this.pkg = pkg;
         this.config = config;
 
         this.initModuleContainers();
@@ -16,8 +17,10 @@ module.exports = class Cic {
 
     initModuleContainers() {
         const controllers = Object.assign({}, this.main.controllers, this.api.controllers);
+        const models = Object.assign({}, this.main.models);
 
         this.controllers = this.initModuleContainer(controllers);
+        this.schames = this.initModuleContainer(models);
     }
 
     initModuleContainer(modules) {
@@ -30,11 +33,11 @@ module.exports = class Cic {
     }
 
     initExternalModules() {
-        const modules = this.pkg.cicModules || [];
+        const modules = this.config.modules || [];
 
         modules
             .map(module => {
-                this.initModule(require.main.require(module))
+                this.initModule(require.main.require(path.join(__dirname, '..', 'modules' , module)))
             })
             .sort();
     }

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall": "cd server && npm i"
+    "preinstall": "cd server && npm i",
+    "start:serve": "cd server && npm run start"
     
   },
   "keywords": [],
