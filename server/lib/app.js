@@ -1,4 +1,6 @@
 const path = require('path');
+const Server = require('./server');
+const Init = require('./init');
 
 module.exports = class App {
     /**
@@ -7,12 +9,25 @@ module.exports = class App {
      * @param {Object} pkg 
      */
     constructor(main, api, config) {
+        let server;
+
         this.main = main;
         this.api = api;
         this.config = config;
 
+        server = new Server();
+        
+        server.init(config, () => {
+            this.express = server.express;
+            new Init(this, () => {
+                server.start();
+            });
+            
+        });
+    }
+
+    init() {
         this.initModuleContainers();
-        this.initExternalModules();
     }
 
     initModuleContainers() {
@@ -32,16 +47,6 @@ module.exports = class App {
             container[module] = this.initModule(modules[module]);
         });
         return container;
-    }
-
-    initExternalModules() {
-        const modules = this.config.modules || [];
-
-        modules
-            .map(module => {
-                this.initModule(require.main.require(path.join(__dirname, '..', 'modules' , module)))
-            })
-            .sort();
     }
 
     /**

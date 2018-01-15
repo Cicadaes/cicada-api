@@ -1,5 +1,11 @@
 const Base = require('./base');
 
-module.exports = class Controller extends Base {
-
+module.exports = class BaseController extends Base {
+    constructor(app, ns, next) {
+        super(app, ns);
+        if (this.constructor.name === 'Controller') {
+            this.app[ns].controllers = this.loadModule(this.app[ns].controllers);
+            next();
+        }
+    }
 };

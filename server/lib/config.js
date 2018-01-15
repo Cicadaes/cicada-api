@@ -3,11 +3,11 @@ const sailsDisk = require('sails-disk');
 
 module.exports = class Config {
     constructor() {
-        this.config = this.initConfig();
+        this.config = this._initConfig();
     }
 
     
-    initConfig() {
+    _initConfig() {
         return rc('cic', this._default());
     }
 

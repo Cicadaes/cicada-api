@@ -1,7 +1,3 @@
 {
-    "port": 4040,
-    "modules": [
-        "express",
-        "waterline"
-    ]
+    "port": 4040
 }

@@ -11,6 +11,11 @@ module.exports = [
         action: 'UserController.getLogin'
     },
     {
+        path: '/login',
+        method: 'POST',
+        action: 'UserController.postLogin'
+    },
+    {
         path: '/signup',
         method: 'GET',
         action: 'UserController.getSignup'

@@ -1,7 +1,10 @@
 const passport = require('passport');
+const passportLocal = require('passport-local');
 
-module.exports = class AuthMiddleware {
-    constructor() {
+
+
+module.exports = class PassportHelper {
+    constructor(app) {
         let user_cache = {};
 
         // Must implement passport.serializeUser and passport.deserializeUser,
@@ -15,5 +18,11 @@ module.exports = class AuthMiddleware {
         passport.deserializeUser(function (id, next) {
             next(null, user_cache[id]);
         });
+
+        // passport.use(new passportLocal({
+        //     usernameField: 'email'
+        // }, (email, password, done) => {
+
+        // }));
     }
 };

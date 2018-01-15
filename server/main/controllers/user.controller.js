@@ -1,3 +1,5 @@
+const passport = require('passport');
+
 const Controller = require('../../lib/base/controller');
 
 module.exports = class UserController extends Controller {
@@ -5,6 +7,23 @@ module.exports = class UserController extends Controller {
         res.render('login/index', {
             title: 'Login'
         });
+    }
+
+    postLogin(req, res, next) {
+        passport.authenticate('local', (err, user, info) => {
+            if (err) {
+                return next(err);
+            }
+            if (!user) {
+                return res.redirect('/login');
+            }
+            req.logIn(user, (err) => {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect('/');
+            })
+        })(req, res, next);
     }
 
     getSignup(req, res) {
