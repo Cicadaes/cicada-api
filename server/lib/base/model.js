@@ -15,8 +15,10 @@ module.exports = class BaseModel extends Base {
                 }
                 this.app.orm = entry.collections;
                 this.app.connections = entry.connections;
+                //Should next in callback, in order to can take `app` real-time, i.e., in `Passport`
+                next();
             });
-            next();
+            // next();
         }
     }
 

@@ -1,8 +1,6 @@
 const passport = require('passport');
 const passportLocal = require('passport-local');
 
-
-
 module.exports = class Passport {
     constructor(app, next) {
         let user_cache = {};
