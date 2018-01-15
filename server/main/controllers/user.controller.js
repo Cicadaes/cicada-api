@@ -1,6 +1,6 @@
 const passport = require('passport');
 
-const Controller = require('../../lib/base/controller');
+const Controller = require('../../lib/init/main/controller');
 
 module.exports = class UserController extends Controller {
     getLogin(req, res) {

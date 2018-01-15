@@ -31,6 +31,8 @@ module.exports = class Base {
      * @param {*} Module 
      */
     _initModule(Module) {
-        return new Module(this);
+        // Inject namespace
+        // Must this.app, i.e., custom `Controller` can take instance of `App` by `this.app`
+        return new Module(this.app, this.ns);
     }
 }

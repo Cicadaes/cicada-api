@@ -1,4 +1,4 @@
-const Controller = require('../../lib/base/controller');
+const Controller = require('../../lib/init/main/controller');
 
 module.exports = class HomeController extends Controller {
     index(req, res) {
