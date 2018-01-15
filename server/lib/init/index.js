@@ -7,7 +7,8 @@ module.exports = class Init {
             'main/middleware',
             'main/controller',
             'main/router',
-            'main/model'
+            'main/model',
+            'passport'
         ];
         const onInit = () => {
             let Pipe = pipes.shift();

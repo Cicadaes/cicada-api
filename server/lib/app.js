@@ -25,36 +25,4 @@ module.exports = class App {
             
         });
     }
-
-    init() {
-        this.initModuleContainers();
-    }
-
-    initModuleContainers() {
-        const middlewares = Object.assign({}, this.main.middlewares);
-        const controllers = Object.assign({}, this.main.controllers, this.api.controllers);
-        const models = Object.assign({}, this.main.models);
-
-        this.middlewares = this.initModuleContainer(middlewares);
-        this.controllers = this.initModuleContainer(controllers);
-        this.schames = this.initModuleContainer(models);
-    }
-
-    initModuleContainer(modules) {
-        const container = {};
-
-        Object.keys(modules).forEach(module => {
-            container[module] = this.initModule(modules[module]);
-        });
-        return container;
-    }
-
-    /**
-     * Intance module, e.g. Express, and transfer this, also express extend BaseModule,
-     * so instance of Express will have properties: api, pkg, app of prototype
-     * @param {*} Module 
-     */
-    initModule(Module) {
-        return new Module(this);
-    }
 }
