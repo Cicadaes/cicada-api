@@ -19,11 +19,20 @@ module.exports = class Passport {
             });
         });
 
-        // passport.use(new passportLocal({
-        //     usernameField: 'email'
-        // }, (email, password, done) => {
-
-        // }));
+        // Local strategy, sign in using Email and Password
+        passport.use(new passportLocal({
+            usernameField: 'email'
+        }, (email, password, done) => {
+            app.orm.user.findOne({email: email.toLowerCase()}, (err, user) => {
+                if (!user) {
+                    return done(null, false, {msg: `Email ${email} not found.`});
+                }
+                if (user.password === password) {
+                    return done(null, user);
+                }
+                return done(null, false, {msg: 'Invalid username or password.'});
+            });
+        }));
         next();
     }
 };
