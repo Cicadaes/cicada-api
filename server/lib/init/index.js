@@ -4,11 +4,11 @@ module.exports = class Init {
         const next = args.pop();
         const app = args.shift();
         const pipes = [
+            'main/model',
+            'passport',
             'main/middleware',
             'main/controller',
-            'main/router',
-            'main/model',
-            'passport'
+            'main/router'
         ];
         const onInit = () => {
             let Pipe = pipes.shift();

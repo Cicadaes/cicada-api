@@ -3,18 +3,20 @@ const passportLocal = require('passport-local');
 
 module.exports = class Passport {
     constructor(app, next) {
-        let user_cache = {};
+        // Passport
+        app.express.use(passport.initialize());
+        app.express.use(passport.session());
 
         // Must implement passport.serializeUser and passport.deserializeUser,
         // otherwise throw `Error: failed to serialize user into session`
         passport.serializeUser(function (user, done) {
-            let id = user.id;
-            user_cache[id] = user;
-            done(null, id);
+            done(null, user.id);
         });
 
         passport.deserializeUser(function (id, done) {
-            done(null, user_cache[id]);
+            app.orm.user.findById(id, (err, user) => {
+                done(null, user);
+            });
         });
 
         // passport.use(new passportLocal({

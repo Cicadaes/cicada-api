@@ -1,7 +1,7 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 const path = require('path');
-const passport = require('passport');
+// const passport = require('passport');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const expressSession = require('express-session');
@@ -39,8 +39,8 @@ module.exports = class Server {
             secret: 'secret'
         }));
         // Passport
-        this.express.use(passport.initialize());
-        this.express.use(passport.session());
+        // this.express.use(passport.initialize());
+        // this.express.use(passport.session());
         // Static i.e., js,css,font
         this.express.use(express.static(path.join(__dirname, '../', 'static')));
         next();

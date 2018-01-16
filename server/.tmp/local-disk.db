@@ -107,6 +107,42 @@
         "createdAt": "2018-01-14T15:11:43.661Z",
         "updatedAt": "2018-01-14T15:11:43.661Z",
         "id": 12
+      },
+      {
+        "username": "demo12",
+        "email": "demo12@demo.com",
+        "password": "111111",
+        "confirmPassword": "111111",
+        "createdAt": "2018-01-16T11:39:03.376Z",
+        "updatedAt": "2018-01-16T11:39:03.376Z",
+        "id": 13
+      },
+      {
+        "username": "demo13",
+        "email": "demo13@demo.com",
+        "password": "111111",
+        "confirmPassword": "111111",
+        "createdAt": "2018-01-16T11:42:35.406Z",
+        "updatedAt": "2018-01-16T11:42:35.406Z",
+        "id": 14
+      },
+      {
+        "username": "demo14",
+        "email": "demo14@demo.com",
+        "password": "111111",
+        "confirmPassword": "111111",
+        "createdAt": "2018-01-16T11:52:50.493Z",
+        "updatedAt": "2018-01-16T11:52:50.493Z",
+        "id": 15
+      },
+      {
+        "username": "demo15",
+        "email": "demo15@demo.com",
+        "password": "111111",
+        "confirmPassword": "111111",
+        "createdAt": "2018-01-16T11:53:54.839Z",
+        "updatedAt": "2018-01-16T11:53:54.839Z",
+        "id": 16
       }
     ]
   },
@@ -139,7 +175,7 @@
   },
   "counters": {
     "user": {
-      "id": 12
+      "id": 16
     }
   }
 }
