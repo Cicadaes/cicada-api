@@ -24,5 +24,10 @@ module.exports = [
         path: '/signup',
         method: 'POST',
         action: 'UserController.postSignup'
+    },
+    {
+        path: '/logout',
+        method: 'GET',
+        action: 'UserController.logout'
     }
 ];

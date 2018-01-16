@@ -63,4 +63,15 @@ module.exports = class UserController extends Controller {
             });
         })
     }
+
+    /**
+     * GET /logout
+     * Log out.
+     * @param {*} req 
+     * @param {*} res 
+     */
+    logout(req, res) {
+        req.logout();
+        res.redirect('/');
+    }
 }
