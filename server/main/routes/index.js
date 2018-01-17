@@ -29,5 +29,11 @@ module.exports = [
         path: '/logout',
         method: 'GET',
         action: 'UserController.logout'
+    },
+    {
+        path: '/user',
+        method: 'GET',
+        action: 'UserController.index',
+        interceptors: ['AuthMiddleware.isAuthenticated']
     }
 ];

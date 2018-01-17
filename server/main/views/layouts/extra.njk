@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block meta %}
+    {% include "includes/meta.njk" %}
+    {% endblock %}
+
+    {# Link to base css #}
+    {% include "includes/css.njk" %}
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+
+    {% block footer %}
+        {# Src to base js #}
+        {% include "includes/js.njk" %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block meta %}
+        {% include "includes/meta.njk" %}
+    {% endblock %}
+
+    {# Link to base css #}
+    {% include "includes/css.njk" %}
+
+    {# Link to function css #}
+    {% block link %}{% endblock %}
+
+    {# Inline css #}
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    {% block header %}
+        {% include "includes/header.njk" %}
+    {% endblock %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                {% include "includes/sidebar.njk" %}
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                {% include "includes/breadcrumb.njk" %}
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    {% block footer %}
+        {% include "includes/footer.njk" %}
+    {% endblock %}
+
+    {# Src to base js #}
+    {% include "includes/js.njk" %}
+
+    {# Src to function js #}
+    {% block js %}{% endblock %}
+
+    {# Inline js #}
+    {% block scripts %}{% endblock %}
+</body>
+</html>

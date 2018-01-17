@@ -1,0 +1,47 @@
+{% block link %}
+    <link rel="stylesheet" href="/css/sidebar.css">
+{% endblock %}
+
+<div class="sidevar-container">
+    <a class="collapsed collapse-header" data-toggle="collapse" data-target="#project"
+        href="javascript:;" aria-expanded="false">
+        <h4>Project</h4>
+    </a>
+    <div class="collapse" id="project">
+        <div class="list-group">
+            <a href="#" class="list-group-item collapse-item">project list</a>
+            <a href="#" class="list-group-item collapse-item">project add</a>
+        </div>
+    </div>
+
+    <a class="collapsed collapse-header" data-toggle="collapse" data-target="#interface"
+        href="javascript:;" aria-expanded="false">
+        <h4>Interface</h4>
+    </a>
+    <div class="collapse" id="interface">
+        <div class="list-group">
+            <a href="#" class="list-group-item collapse-item">interface list</a>
+            <a href="#" class="list-group-item collapse-item">interface add</a>
+        </div>
+    </div>
+
+    <a class="collapsed collapse-header" data-toggle="collapse" data-target="#user"
+        href="javascript:;" aria-expanded="false">
+        <h4>User</h4>
+    </a>
+    <div class="collapse" id="user">
+        <div class="list-group">
+            <a href="/user" class="list-group-item collapse-item">user list</a>
+        </div>
+    </div>
+
+    <a class="collapsed collapse-header" data-toggle="collapse" data-target="#setting"
+        href="javascript:;" aria-expanded="false">
+        <h4>Setting</h4>
+    </a>
+    <div class="collapse" id="setting">
+        <div class="list-group">
+            <a href="#" class="list-group-item collapse-item">config</a>
+        </div>
+    </div>
+</div>

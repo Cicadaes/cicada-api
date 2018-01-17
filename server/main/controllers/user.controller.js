@@ -3,6 +3,23 @@ const passport = require('passport');
 const Controller = require('../../lib/init/main/controller');
 
 module.exports = class UserController extends Controller {
+    index(req, res) {
+        // this.app.orm.user.create({
+        //     username: 'admin',
+        //     email: 'admin@admin.com',
+        //     password: 'admin'
+        // }, (err, record) => {
+        //     console.log(record);
+        //     if (err) return res.status(500).json(err);
+        // });
+        this.app.orm.user.find({}).then((records) => {
+            res.render('user/index', {
+                title: 'User',
+                users: records
+            });
+        });
+    }
+
     getLogin(req, res) {
         res.render('login/index', {
             title: 'Login'
