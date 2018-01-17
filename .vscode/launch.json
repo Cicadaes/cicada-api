@@ -8,8 +8,8 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch via NPM",
-            "cwd": "${workspaceFolder}\\server",
+            "name": "Cicada API",
+            "cwd": "${workspaceFolder}",
             "runtimeExecutable": "npm",
             "windows": {
                 "runtimeExecutable": "npm.cmd"
@@ -19,12 +19,6 @@
                 "debug"
             ],
             "port": 5858
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}\\index.js"
         }
     ]
 }
