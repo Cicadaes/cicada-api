@@ -7,22 +7,27 @@
     "start": "node ./lib/index.js",
     "watch": "nodemon ./lib/index.js",
     "debug": "node --inspect=5858 --inspect-brk ./lib/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "express-validator": "^4.3.0",
-    "nodemon": "^1.14.11",
     "nunjucks": "^3.0.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "rc": "^1.2.3",
     "sails-disk": "^0.10.10",
-    "waterline": "^0.10.31"
+    "waterline": "^0.10.31",
+    "rc": "^1.2.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.0",
+    "nodemon": "^1.14.11",
+    "supertest": "^3.0.0"
   }
 }
