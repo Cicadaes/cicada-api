@@ -1,8 +1,10 @@
 (function ($) {
-    var $container = $('.sidevar-container');
+    var $container = $('.sidebar-container');
 
-    $container.on('click', function () {
-        $container.find('.collapse .list-group').children().removeClass('active');
-        $(this).addClass('active');
+    var url = window.location;
+    $(window).on('load', function () {
+        var element = $container.find('div.list-group > a').filter(function () {
+            return this.href == url || url.href.indexOf(this.href) == 0;
+        }).addClass('active').closest('.collapse').prev().trigger('click');
     });
 })(jQuery);

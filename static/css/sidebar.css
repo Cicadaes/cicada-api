@@ -77,5 +77,18 @@ a.collapse-header:focus, a.collapse-header:hover {
 }
 
 .collapse-item.active {
-    color: #286090 !important;
+    color: #0089ff !important;
+}
+
+.sidebar-container .panel {
+    margin-bottom: initial;
+    background-color: initial;
+    border: initial;
+    border-radius: initial;
+    -webkit-box-shadow: initial;
+    box-shadow: initial;
+}
+
+.sidebar-container .list-group a {
+    padding-left: 30px;
 }
