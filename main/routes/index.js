@@ -35,5 +35,11 @@ module.exports = [
         method: 'GET',
         action: 'UserController.index',
         interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/project',
+        method: 'GET',
+        action: 'ProjectController.index',
+        interceptors: ['AuthMiddleware.isAuthenticated']
     }
 ];

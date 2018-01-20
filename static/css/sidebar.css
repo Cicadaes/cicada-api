@@ -20,12 +20,6 @@
      }
  }
 
-.collapse-item {
-    background-color: #242424 !important;
-    color: #fff !important;
-    border: none !important;
-}
-
 .collapse-header {
     position: relative;
 	display: block;
@@ -74,4 +68,14 @@ a.collapse-header:focus, a.collapse-header:hover {
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
+}
+
+.collapse-item {
+    background-color: #242424 !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.collapse-item.active {
+    color: #286090 !important;
 }
