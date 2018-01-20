@@ -1,5 +1,27 @@
 {% extends 'layouts/base.njk'  %}
 
 {% block content %}
-kkkkkkkkk
+    <a class="btn btn-primary pull-right" href="/project/add" role="button">Add project</a>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>description</th>
+                <th>operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+                <tr>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.description }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="#" role="button">Edit</a>
+                        <a class="btn btn-primary" href="#" role="button">Delete</a>
+                        <a class="btn btn-primary" href="#" role="button">Show Interface</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
 {% endblock %}

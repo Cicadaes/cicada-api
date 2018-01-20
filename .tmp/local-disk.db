@@ -144,7 +144,8 @@
         "updatedAt": "2018-01-16T11:53:54.839Z",
         "id": 16
       }
-    ]
+    ],
+    "project": []
   },
   "schema": {
     "user": {
@@ -171,11 +172,32 @@
       "updatedAt": {
         "type": "datetime"
       }
+    },
+    "project": {
+      "name": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
     }
   },
   "counters": {
     "user": {
       "id": 16
-    }
+    },
+    "project": {}
   }
 }
