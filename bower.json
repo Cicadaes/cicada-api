@@ -15,5 +15,9 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery-pjax": "^2.0.1"
+  },
+  "devDependencies": {
+    "jquery-form": "^4.2.2",
+    "toastr": "^2.1.3"
   }
 }

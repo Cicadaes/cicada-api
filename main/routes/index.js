@@ -47,5 +47,11 @@ module.exports = [
         method: 'GET',
         action: 'ProjectController.getAdd',
         interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/project/add',
+        method: 'POST',
+        action: 'ProjectController.postAdd',
+        interceptors: ['AuthMiddleware.isAuthenticated']
     }
 ];

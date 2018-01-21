@@ -145,7 +145,37 @@
         "id": 16
       }
     ],
-    "project": []
+    "project": [
+      {
+        "name": "upreloan1",
+        "description": "upreloan1 descrition",
+        "createdAt": "2018-01-21T05:42:11.703Z",
+        "updatedAt": "2018-01-21T05:42:11.703Z",
+        "id": 1
+      },
+      {
+        "name": "tttttttttttt",
+        "description": "tttttttttttttttttttttt",
+        "createdAt": "2018-01-21T07:19:26.392Z",
+        "updatedAt": "2018-01-21T07:19:26.392Z",
+        "id": 2
+      },
+      {
+        "name": "77777777777",
+        "description": "77777777777777777777",
+        "createdAt": "2018-01-21T07:25:35.992Z",
+        "updatedAt": "2018-01-21T07:25:35.992Z",
+        "id": 3
+      },
+      {
+        "name": "77777777",
+        "description": "7777777777777777777777",
+        "createdAt": "2018-01-21T07:33:22.322Z",
+        "updatedAt": "2018-01-21T07:33:22.322Z",
+        "id": 4
+      }
+    ],
+    "interface": []
   },
   "schema": {
     "user": {
@@ -174,17 +204,41 @@
       }
     },
     "project": {
-      "name": {
-        "type": "string"
-      },
-      "description": {
-        "type": "string"
-      },
       "id": {
         "type": "integer",
         "autoIncrement": true,
         "primaryKey": true,
         "unique": true
+      },
+      "name": {
+        "type": "string",
+        "size": 20,
+        "index": true
+      },
+      "description": {
+        "type": "string",
+        "size": 100
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "interface": {
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "projectId": {
+        "type": "integer",
+        "model": "project",
+        "foreignKey": true,
+        "alias": "projectId",
+        "index": true
       },
       "createdAt": {
         "type": "datetime"
@@ -198,6 +252,9 @@
     "user": {
       "id": 16
     },
-    "project": {}
+    "project": {
+      "id": 4
+    },
+    "interface": {}
   }
 }

@@ -3,7 +3,7 @@ const Model = require('../../lib/base/model');
 module.exports = class ProjectModel extends Model {
     schema() {
         return {
-            identity: 'project',
+            identity: 'interface',
             connection: 'local-disk',
             autoCreatedAt: true,
             autoUpdatedAt: true,
@@ -13,21 +13,10 @@ module.exports = class ProjectModel extends Model {
                     autoIncrement: true,
                     primaryKey: true
                 },
-                name: {
-                    type: 'string',
-                    size: 20,
-                    maxLength: 20,
-                    required: true,
-                    index:true
+                projectId: {
+                    model: 'project',
+                    index: true
                 },
-                description: {
-                    type: 'string',
-                    size: 100
-                },
-                interfaces: {
-                  collection: 'interface',
-                  via: 'projectId'
-                }
             }
         }
     }
