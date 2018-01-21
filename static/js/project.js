@@ -1,4 +1,4 @@
-(function ($) {
+(function () {
     $(document).ready(function () {
         $("#save").on("click",function(){
             $('#addForm').submit();
@@ -18,5 +18,27 @@
                 // form.find("button:submit").button("reset");
             }
         });
+        $('#project-table').delegate('a.project-delete', 'click', function () {
+            var $modal = $('#modal-project-delete');
+            var id = $(this).data('id');
+
+            $modal.find('#modal-project-name').text($(this).data('name'));
+            $modal.prev().trigger('click');
+
+            $modal.find('#modal-project-submit').on('click', function () {
+                $.ajax({
+                    method: 'DELETE',
+                    type: 'json',
+                    url: '/project/' + id,
+                    success: function (data) {
+                        if (data.code == 0) {
+                            toastr.success(data.msg);
+                        } else {
+                            toastr.error(data.msg);
+                        }
+                    }
+                });
+            });
+        });
     });
-})(jQuery);
+})();

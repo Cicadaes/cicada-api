@@ -53,5 +53,23 @@ module.exports = [
         method: 'POST',
         action: 'ProjectController.postAdd',
         interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/project/edit/:id',
+        method: 'GET',
+        action: 'ProjectController.getEdit',
+        interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/project/edit/:id',
+        method: 'POST',
+        action: 'ProjectController.postEdit',
+        interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/project/:id',
+        method: 'DELETE',
+        action: 'ProjectController.delete',
+        interceptors: ['AuthMiddleware.isAuthenticated']
     }
 ];
