@@ -1,0 +1,77 @@
+{% extends 'layouts/base.njk'  %}
+
+{% block content %}
+    <a class="btn btn-primary pull-right" href="/interface/add" role="button" data-pjax>Add Interface</a>
+    <table class="table table-hover" id="interface-table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>project name</th>
+                <th>method</th>
+                <th>path</th>
+                <th>description</th>
+                <th>operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for interface in interface %}
+                <tr>
+                    <td>{{ interface.id }}</td>
+                    <td>{{ interface.name }}</td>
+                    <td>{{ interface.type }}</td>
+                    <td>{{ interface.path }}</td>
+                    <td>{{ interface.desc }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="/interface/edit/{{ interface.id }}" role="button" data-pjax>Edit</a>
+                        <a class="btn btn-primary interface-delete" href="javascript:;" role="button"
+                            data-id="{{ interface.id }}" data-name="{{ interface.name }}">Delete</a>
+                        <a class="btn btn-primary" href="#" role="button">Show Interface</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a class="btn btn-primary hide" data-toggle="modal" href='#modal-interface-delete'>Trigger modal</a>
+    <div class="modal fade" id="modal-interface-delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Confirm delete <span id="modal-interface-name"></span>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
+                    <button type="button" class="btn btn-danger" id="modal-interface-submit" data-dismiss="modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script src="/js/interface.js"></script> -->
+    <script>
+        $(document).ready(function () {
+            $('#interface-table').delegate('a.interface-delete', 'click', function () {
+                var $modal = $('#modal-interface-delete');
+                var id = $(this).data('id');
+
+                $modal.find('#modal-interface-name').text($(this).data('name'));
+                $modal.prev().trigger('click');
+
+                $modal.find('#modal-interface-submit').on('click', function () {
+                    $.ajax({
+                        method: 'DELETE',
+                        type: 'json',
+                        url: '/interface/' + id,
+                        success: function (data) {
+                            if (data.code == 0) {
+                                toastr.success(data.msg);
+                            } else {
+                                toastr.error(data.msg);
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+{% endblock %}

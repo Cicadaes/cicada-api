@@ -71,5 +71,17 @@ module.exports = [
         method: 'DELETE',
         action: 'ProjectController.delete',
         interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/interface',
+        method: 'GET',
+        action: 'InterfaceController.index',
+        interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/interface/add',
+        method: 'GET',
+        action: 'InterfaceController.getAdd',
+        interceptors: ['AuthMiddleware.isAuthenticated']
     }
 ];
