@@ -2,9 +2,7 @@
   "name": "server",
   "description": "",
   "main": "lib/index.js",
-  "authors": [
-
-  ],
+  "authors": [],
   "license": "ISC",
   "homepage": "https://github.com/Cicadaes/cicada",
   "ignore": [
@@ -15,6 +13,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "jquery-pjax": "^2.0.1"
   }
 }
