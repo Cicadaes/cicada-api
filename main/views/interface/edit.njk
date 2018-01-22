@@ -1,36 +1,132 @@
 {% extends 'layouts/base.njk'  %}
 
 {% block content %}
-    <form id="addForm" action="/project/edit/{{ project.id }}" method="POST" class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="name" class="col-md-2 control-label">Project name</label>
-            <div class="col-md-10">
-                <input type="text" class="form-control input-lg" name="name" value="{{ project.name }}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="description" class="col-md-2 control-label">Project description</label>
-            <div class="col-md-10">
-                <input type="text" class="form-control input-lg" name="description" value="{{ project.description }}">
+    <form id="interfaceForm" action="/interface/edit/{{ interface.id }}" method="POST" class="form-horizontal" role="form">
+        <div role="tabpanel" class="tab-block">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#base" aria-controls="base" role="tab" data-toggle="tab">Base</a>
+                </li>
+                <li role="presentation">
+                    <a href="#request" aria-controls="request" role="tab" data-toggle="tab">Request</a>
+                </li>
+                <li role="presentation">
+                    <a href="#response" aria-controls="response" role="tab" data-toggle="tab">Response</a>
+                </li>
+            </ul>
+        
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade active in" id="base">
+                    <div class="form-group">
+                        <label for="class" class="col-sm-2 control-label">Project</label>
+            
+                        <div class="col-sm-8">
+                            <select name="projectId" class="form-control">
+                                <option value="">Please select</option>
+                                {% for project in projects %}
+                                    <option value="{{ project.id }}" {% if project.id == interface.projectId.id %} selected {% endif %}>{{ project.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="form-group-dashed tab-pane fade" id="request">
+                    <div class="form-group">
+                        <label for="class" class="col-sm-2 control-label">Method</label>
+            
+                        <div class="col-sm-8">
+                                {% set methods=[
+                                    'GET',
+                                    'POST',
+                                    'PUT',
+                                    'DELETE']
+                                %}
+                            <select name="method" class="form-control">
+                                <option value="">Please select</option>
+                                {% for method in methods %}
+                                    <option value="{{ method.toLowerCase() }}" {% if method.toLowerCase() == interface.method %} selected {% endif %}>{{ method }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-sm-2 control-label">
+                            Path
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="input-group"><span class="input-group-addon">/</span>
+                                <input type="text" name="path" class="form-control" value="{{ interface.path }}">
+                                <!-- <input type="hidden" name="project_prefix" value="/"> -->
+                            </div>
+                            <p class="help-block">i.e.：a?id=[id]&name=[name], a/:id/:name, a.do</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc" class="col-sm-2 control-label">Description</label>
+            
+                        <div class="col-sm-8">
+                            <textarea name="desc" class="form-control"
+                                style="width:100%;height:60px;">{{ interface.desc }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="form-group-dashed tab-pane fade" id="response">
+                        <div class="form-group">
+                            <label for="desc" class="col-sm-2 control-label">Body</label>
+                
+                            <div class="col-sm-8">
+                                <textarea name="response_body" id="response_body" class="form-control hide"
+                                    style="width:100%;height:60px;">{{ interface.responseBodyId.template }}</textarea>
+                                <div class="jsoneditor" style="width: 400px; height: 400px;" data-target="#response_body"></div>
+                            </div>
+                        </div>
+                </div>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-2 col-sm-offset-10">
-                <button type="button" class="btn btn-primary" id="save">Submit</button>
+                <button type="submit" class="btn btn-primary" id="save">Submit</button>
             </div>
         </div>
     </form>
 
-    <!-- <script  language="JavaScript" src="/js/project.js"></script> -->
+    <!-- <script src="/js/project.js"></script> -->
     <script>
         $(document).ready(function () {
-            $("#save").on("click",function(){
-                $('#addForm').submit();
+            // create the editor
+            var $jsoneditors = $(".jsoneditor");
+            var options = {};
+
+            $jsoneditors.each(function () {
+                var $target = $($(this).data('target'));
+                var editor = new JSONEditor(this, options);
+
+                if ($target.val().trim()) {
+                    editor.set(JSON.parse($target.val()));
+                }
+                $.data(this, 'jsoneditor', editor);
             });
-            $('#addForm').ajaxForm({
+
+            // $jsoneditors.load('', function() {
+            //     var $target = $($(this).data('target'));
+
+            //     var editor = $.data(this, 'jsoneditor');
+            //     editor.setJson($target.val());
+            // });
+
+            $('#interfaceForm').ajaxForm({
                 dataType: 'json',
-                beforeSubmit: function (arr, form, options) {
-                //    form.find("button:submit").button("loading");
+                beforeSerialize: function (form, options) {
+                    $jsoneditors.each(function () {
+                        var $textarea = $($(this).data('target'));
+                        var editor = $.data(this, 'jsoneditor');
+                        var json = editor.get();
+                        if (json) {
+                            $textarea.val(JSON.stringify(json));
+                        }
+                    });
                 },
                 success: function(data, statusText, xhr, form) {
                     if (data.code == 0) {
@@ -39,7 +135,6 @@
                     } else {
                         toastr.error(data.msg);
                     }
-                    // form.find("button:submit").button("reset");
                 }
             });
         });

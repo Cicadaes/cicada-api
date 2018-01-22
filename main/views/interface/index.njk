@@ -14,18 +14,17 @@
             </tr>
         </thead>
         <tbody>
-            {% for interface in interface %}
+            {% for interface in interfaces %}
                 <tr>
                     <td>{{ interface.id }}</td>
-                    <td>{{ interface.name }}</td>
-                    <td>{{ interface.type }}</td>
+                    <td>{{ interface.projectId.name }}</td>
+                    <td>{{ interface.method }}</td>
                     <td>{{ interface.path }}</td>
                     <td>{{ interface.desc }}</td>
                     <td>
                         <a class="btn btn-primary" href="/interface/edit/{{ interface.id }}" role="button" data-pjax>Edit</a>
                         <a class="btn btn-primary interface-delete" href="javascript:;" role="button"
-                            data-id="{{ interface.id }}" data-name="{{ interface.name }}">Delete</a>
-                        <a class="btn btn-primary" href="#" role="button">Show Interface</a>
+                            data-id="{{ interface.id }}" data-name="{{ interface.path }}">Delete</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -59,9 +58,9 @@
 
                 $modal.find('#modal-interface-submit').on('click', function () {
                     $.ajax({
-                        method: 'DELETE',
+                        method: 'POST',
                         type: 'json',
-                        url: '/interface/' + id,
+                        url: '/interface/delete/' + id,
                         success: function (data) {
                             if (data.code == 0) {
                                 toastr.success(data.msg);

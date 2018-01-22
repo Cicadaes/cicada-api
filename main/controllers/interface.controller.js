@@ -4,7 +4,7 @@ module.exports = class InterfaceController extends Controller {
     index(req, res) {
         const Interface = this.app.orm.interface;
 
-        Interface.find().sort('name asc').exec((err, records) => {
+        Interface.find().populate('projectId').sort('path asc').exec((err, records) => {
             res.render('interface/index', {
                 title: 'Interface manager',
                 interfaces: records
@@ -39,8 +39,8 @@ module.exports = class InterfaceController extends Controller {
             if (err) {
                 return res.json({code: 1, msg: 'Add interface fail'});
             }
-            var rb = {};
-            var Response_body = this.app.orm.response_body;
+            let rb = {};
+            const Response_body = this.app.orm.response_body;
 
             rb.interfaceId = record.id;
             rb.template = req.body.response_body;
@@ -56,50 +56,53 @@ module.exports = class InterfaceController extends Controller {
     }
 
     getEdit(req, res) {
+        const Interface = this.app.orm.interface;
         const Project = this.app.orm.project;
         const id = req.params.id;
 
-        Project.findOne({id: id}).exec((err, record) => {
-            if (record) {
-                return res.render('project/edit', {
-                    project: record
-                });
-            } else {
-                res.end('Not found');
-            }
+        Project.find().exec((err, projects) => {
+            
+            Interface.findOne({id: id}).populate('projectId').populate('responseBodyId').exec((err, record) => {
+                if (record) {
+                    return res.render('interface/edit', {
+                        interface: record,
+                        projects: projects
+                    });
+                } else {
+                    res.end('Not found');
+                }
+            });
         });
     }
 
     postEdit(req, res) {
-        const Project = this.app.orm.project;
-        const id = req.params.id;
-        let err;
+        const Interface = this.app.orm.interface;
 
-        req.assert('name', 'Name is required').notEmpty();
-        req.assert('description', 'Description is required').notEmpty();
-
-        err = req.validationErrors();
-        if (err) {
-            return res.json({code: 1, msg: 'Invalid name or description'});
-        }
-
-        Project.update({id: id}, req.body).exec((err, record) => {
-            if (err || !record) {
-                return res.json({code: 1, msg: 'Update fail'});
+        Interface.update({id: req.params.id}, req.body).exec((err, record) => {
+            if (err) {
+                return res.json({code: 1, msg: 'Update interface fail'});
             }
-            return res.json({code: 0, msg: 'Update success'});
+            let rb = {};
+            const Response_body = this.app.orm.response_body;
+
+            rb.interfaceId = req.params.id;
+            rb.template = req.body.response_body;
+            Response_body.update({interfaceId: req.params.id}, rb).exec((err, body) => {
+                return res.json({code: 0, msg: 'Update interface success'});
+            });
         });
     }
 
     delete(req, res) {
-        const Project = this.app.orm.project;
+        const Interface = this.app.orm.interface;
+        const Response_body = this.app.orm.response_body;
         const id = req.params.id;
 
-        Project.findOne(id).exec((err, record) => {
-            Project.destroy({name: {like: record.name+'%'}}).exec((err, record) => {
-                if (err) {
-                    return res.json({code: 1, msg: 'Delete fail'});
-                }
+        Interface.destroy({id: id}).exec((err, record) => {
+            if (err) {
+                return res.json({code: 1, msg: 'Delete fail'});
+            }
+            Response_body.destroy({interfaceId: id}).exec((err, record) => {
                 return res.json({code: 0, msg: 'Delete success'});
             });
         });

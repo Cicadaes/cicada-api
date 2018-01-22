@@ -89,5 +89,23 @@ module.exports = [
         method: 'POST',
         action: 'InterfaceController.postAdd',
         interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/interface/edit/:id',
+        method: 'GET',
+        action: 'InterfaceController.getEdit',
+        interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/interface/edit/:id',
+        method: 'POST',
+        action: 'InterfaceController.postEdit',
+        interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/interface/delete/:id',
+        method: 'POST',
+        action: 'InterfaceController.delete',
+        interceptors: ['AuthMiddleware.isAuthenticated']
     }
 ];
