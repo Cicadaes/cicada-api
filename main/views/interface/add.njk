@@ -1,7 +1,7 @@
 {% extends 'layouts/base.njk'  %}
 
 {% block content %}
-    <form id="addForm" action="/interface" method="POST" class="form-horizontal" role="form">
+    <form id="interfaceForm" action="/interface" method="POST" class="form-horizontal" role="form">
         <div role="tabpanel" class="tab-block">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
@@ -60,23 +60,33 @@
                                 <input type="text" name="path" class="form-control">
                                 <!-- <input type="hidden" name="project_prefix" value="/"> -->
                             </div>
-                            <p class="help-block">i.e.：demo, a/:id/:name</p>
+                            <p class="help-block">i.e.：a?id=[id]&name=[name], a/:id/:name, a.do</p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="desc" class="col-sm-2 control-label">description</label>
+                        <label for="desc" class="col-sm-2 control-label">Description</label>
             
                         <div class="col-sm-8">
                             <textarea name="desc" class="form-control" style="width:100%;height:60px;"></textarea>
                         </div>
                     </div>
                 </div>
-                <div role="tabpanel" class="form-group-dashed tab-pane fade" id="response">...33</div>
+                <div role="tabpanel" class="form-group-dashed tab-pane fade" id="response">
+                        <div class="form-group">
+                            <label for="desc" class="col-sm-2 control-label">Body</label>
+                
+                            <div class="col-sm-8">
+                                <textarea name="response_body" id="response_body" class="form-control hide" style="width:100%;height:60px;">
+                                </textarea>
+                                <div class="jsoneditor" style="width: 400px; height: 400px;" data-target="#response_body"></div>
+                            </div>
+                        </div>
+                </div>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-2 col-sm-offset-10">
-                <button type="button" class="btn btn-primary" id="save">Submit</button>
+                <button type="submit" class="btn btn-primary" id="save">Submit</button>
             </div>
         </div>
     </form>
@@ -84,13 +94,24 @@
     <!-- <script src="/js/project.js"></script> -->
     <script>
         $(document).ready(function () {
-            $("#save").on("click",function(){
-                $('#addForm').submit();
+            // create the editor
+            var $jsoneditors = $(".jsoneditor");
+            var options = {};
+            $jsoneditors.each(function () {
+                $.data(this, 'jsoneditor', new JSONEditor(this, options));
             });
-            $('#addForm').ajaxForm({
+
+            $('#interfaceForm').ajaxForm({
                 dataType: 'json',
-                beforeSubmit: function (arr, form, options) {
-                //    form.find("button:submit").button("loading");
+                beforeSerialize: function (form, options) {
+                    $jsoneditors.each(function () {
+                        var $textarea = $($(this).data('target'));
+                        var editor = $.data(this, 'jsoneditor');
+                        var json = editor.get();
+                        if (json) {
+                            $textarea.val(JSON.stringify(json));
+                        }
+                    });
                 },
                 success: function(data, statusText, xhr, form) {
                     if (data.code == 0) {
@@ -99,9 +120,20 @@
                     } else {
                         toastr.error(data.msg);
                     }
-                    // form.find("button:submit").button("reset");
                 }
             });
+
+            // $('#interfaceForm').submit(function () {
+            //     $jsoneditors.each(function () {
+            //         var $textarea = $($(this).data('target'));
+            //         var editor = $.data(this, 'jsoneditor');
+            //         var json = editor.get();
+
+            //         if (json) {
+            //             $textarea.val(JSON.stringify(json));
+            //         }
+            //     })
+            // });
         });
     </script>
 {% endblock %}

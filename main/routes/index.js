@@ -83,5 +83,11 @@ module.exports = [
         method: 'GET',
         action: 'InterfaceController.getAdd',
         interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/interface',
+        method: 'POST',
+        action: 'InterfaceController.postAdd',
+        interceptors: ['AuthMiddleware.isAuthenticated']
     }
 ];

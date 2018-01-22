@@ -168,7 +168,88 @@
         "id": 4
       }
     ],
-    "interface": []
+    "interface": [
+      {
+        "projectId": 1,
+        "method": "get",
+        "path": "demo",
+        "desc": "dfdfdfdf",
+        "response_body": "{\"11\":11,\"ttt\":null}",
+        "createdAt": "2018-01-22T14:22:38.775Z",
+        "updatedAt": "2018-01-22T14:22:38.775Z",
+        "id": 1
+      },
+      {
+        "projectId": 2,
+        "method": "post",
+        "path": "demo",
+        "desc": "fdfsdfsd",
+        "response_body": "{\"333\":7777}",
+        "createdAt": "2018-01-22T14:26:30.313Z",
+        "updatedAt": "2018-01-22T14:26:30.313Z",
+        "id": 2
+      },
+      {
+        "projectId": 1,
+        "method": "get",
+        "path": "test",
+        "desc": "fdae fdfdfafd",
+        "response_body": "                                ",
+        "createdAt": "2018-01-22T14:35:47.098Z",
+        "updatedAt": "2018-01-22T14:35:47.098Z",
+        "id": 3
+      },
+      {
+        "projectId": 4,
+        "method": "put",
+        "path": "ttttt",
+        "desc": "trtrtrt",
+        "response_body": "{\"11\":{\"66611\":7777}}",
+        "createdAt": "2018-01-22T14:54:48.760Z",
+        "updatedAt": "2018-01-22T14:54:48.760Z",
+        "id": 4
+      },
+      {
+        "projectId": 1,
+        "method": "get",
+        "path": "demo",
+        "desc": "fdfefe",
+        "response_body": "{\"tt\":false}",
+        "createdAt": "2018-01-22T15:16:34.654Z",
+        "updatedAt": "2018-01-22T15:16:34.654Z",
+        "id": 5
+      },
+      {
+        "projectId": 4,
+        "method": "delete",
+        "path": "8888",
+        "desc": "888888888888",
+        "response_body": "{\"888888888888888\":\"pppppppppppppppp\"}",
+        "createdAt": "2018-01-22T15:18:02.070Z",
+        "updatedAt": "2018-01-22T15:18:02.070Z",
+        "id": 6
+      },
+      {
+        "projectId": 1,
+        "method": "delete",
+        "path": "99999",
+        "desc": "9999999999999",
+        "response_body": "{\"9999999\":999999999999999}",
+        "createdAt": "2018-01-22T15:23:59.210Z",
+        "updatedAt": "2018-01-22T15:23:59.248Z",
+        "id": 7,
+        "responseBodyId": 1
+      }
+    ],
+    "response_body": [
+      {
+        "interfaceId": 7,
+        "template": "{\"9999999\":999999999999999}",
+        "createdAt": "2018-01-22T15:23:59.229Z",
+        "updatedAt": "2018-01-22T15:23:59.229Z",
+        "id": 1
+      }
+    ]
   },
   "schema": {
     "user": {
@@ -230,8 +311,47 @@
         "type": "integer",
         "model": "project",
         "foreignKey": true,
-        "alias": "projectId",
+        "alias": "projectId"
+      },
+      "method": {
+        "type": "string"
+      },
+      "path": {
+        "type": "string"
+      },
+      "desc": {
+        "type": "string"
+      },
+      "responseBodyId": {
+        "type": "integer",
+        "model": "response_body",
+        "foreignKey": true,
+        "alias": "responseBodyId",
         "index": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "response_body": {
+      "template": {
+        "type": "text"
+      },
+      "interfaceId": {
+        "type": "integer",
+        "model": "interface",
+        "foreignKey": true,
+        "alias": "interfaceId",
+        "index": true
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
       },
       "createdAt": {
         "type": "datetime"
@@ -248,6 +368,11 @@
     "project": {
       "id": 5
     },
-    "interface": {}
+    "interface": {
+      "id": 7
+    },
+    "response_body": {
+      "id": 1
+    }
   }
 }

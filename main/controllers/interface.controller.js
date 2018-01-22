@@ -24,22 +24,34 @@ module.exports = class InterfaceController extends Controller {
     }
 
     postAdd(req, res) {
-        const Project = this.app.orm.project;
-        let err;
+        const Interface = this.app.orm.interface;
+        // let err;
 
-        req.assert('name', 'Name is required').notEmpty();
-        req.assert('description', 'Description is required').notEmpty();
+        // req.assert('name', 'Name is required').notEmpty();
+        // req.assert('description', 'Description is required').notEmpty();
 
-        err = req.validationErrors();
-        if (err) {
-            return  res.json({code: 1, msg: 'Invalid name or description'});
-        }
+        // err = req.validationErrors();
+        // if (err) {
+        //     return  res.json({code: 1, msg: 'Invalid name or description'});
+        // }
 
-        Project.create(req.body).exec((err, p) => {
+        Interface.create(req.body).exec((err, record) => {
             if (err) {
-                return res.json({code: 1, msg: 'Add project fail'});
+                return res.json({code: 1, msg: 'Add interface fail'});
             }
-            return res.json({code: 0, msg: 'Add project success'});
+            var rb = {};
+            var Response_body = this.app.orm.response_body;
+
+            rb.interfaceId = record.id;
+            rb.template = req.body.response_body;
+            Response_body.create(rb).exec((err, body) => {
+                if (body) {
+                    Interface.update(record.id, {responseBodyId: body.id}).exec((err, u) => {
+
+                    });
+                }
+            });
+            return res.json({code: 0, msg: 'Add interface success'});
         });
     }
 

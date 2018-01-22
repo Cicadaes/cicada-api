@@ -8,9 +8,12 @@
     }
 }
 
+.tab-block {
+    padding-bottom: 15px;
+}
+
 .tab-block .tab-content {
-    padding: 15px;
+    padding-top: 15px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    border-bottom: 1px dashed #e8e8e8;
 }

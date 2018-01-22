@@ -15,8 +15,24 @@ module.exports = class ProjectModel extends Model {
                 },
                 projectId: {
                     model: 'project',
-                    index: true
+                    required: true
                 },
+                method: {
+                    type: 'string',
+                    required: true
+                },
+                path: {
+                    type: 'string',
+                    required: true
+                },
+                desc: {
+                    type: 'string',
+                    required: true
+                },
+                responseBodyId: {
+                    model: 'response_body',
+                    index: true
+                }
             }
         }
     }
