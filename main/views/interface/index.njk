@@ -25,6 +25,7 @@
                         <a class="btn btn-primary" href="/interface/edit/{{ interface.id }}" role="button" data-pjax>Edit</a>
                         <a class="btn btn-primary interface-delete" href="javascript:;" role="button"
                             data-id="{{ interface.id }}" data-name="{{ interface.path }}">Delete</a>
+                        <a class="btn btn-primary api_href" method="{{ interface.method }}" href="javascript:;" data-href="/api/{{ interface.projectId.name }}/{{ interface.path }}" role="button">View</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -45,6 +46,9 @@
             </div>
         </div>
     </div>
+
+    <form action="" method="" id="apiForm">
+    </form>
 
     <!-- <script src="/js/interface.js"></script> -->
     <script>
@@ -70,6 +74,17 @@
                         }
                     });
                 });
+            });
+
+            $('.api_href').click(function() {
+                $('#apiForm').attr('action', $(this).data('href'));
+                $('#apiForm').attr('method', $(this).attr('method'));
+                $('#apiForm').ajaxForm({
+                    dataType: 'json',
+                    success: function(data, statusText, xhr, form) {
+                        alert(JSON.stringify(data));
+                    }
+                }).submit();
             });
         });
     </script>

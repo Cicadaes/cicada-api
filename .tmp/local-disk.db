@@ -238,6 +238,17 @@
         "updatedAt": "2018-01-23T15:20:00.708Z",
         "id": 9,
         "responseBodyId": 3
+      },
+      {
+        "projectId": 6,
+        "method": "post",
+        "path": "testPost.do",
+        "desc": "fdffdfdf",
+        "response_body": "{\"yy\":[3]}",
+        "createdAt": "2018-01-23T16:22:19.300Z",
+        "updatedAt": "2018-01-23T16:22:19.329Z",
+        "id": 10,
+        "responseBodyId": 4
       }
     ],
     "response_body": [
@@ -261,6 +272,13 @@
         "createdAt": "2018-01-23T15:20:00.676Z",
         "updatedAt": "2018-01-23T15:20:00.676Z",
         "id": 3
+      },
+      {
+        "interfaceId": 10,
+        "template": "{\"yy\":[3]}",
+        "createdAt": "2018-01-23T16:22:19.313Z",
+        "updatedAt": "2018-01-23T16:22:19.313Z",
+        "id": 4
       }
     ]
   },
@@ -383,10 +401,10 @@
       "id": 6
     },
     "interface": {
-      "id": 9
+      "id": 10
     },
     "response_body": {
-      "id": 3
+      "id": 4
     }
   }
 }

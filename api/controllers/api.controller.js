@@ -16,7 +16,7 @@ module.exports = class ApiController extends Controller {
         let path;
         let method;
 
-        prefix = req.url.match(/\/api\/(\w+)\/(.+)$/);
+        prefix = req.path.match(/\/api\/(\w+)\/(.+)/);
         if (!prefix || prefix.length < 3) {
             return res.json({code: 1, msg: '404, Api not found'});
         }
