@@ -18,7 +18,8 @@ module.exports = class ProjectModel extends Model {
                     size: 20,
                     maxLength: 20,
                     required: true,
-                    index:true
+                    index: true,
+                    unique: true
                 },
                 description: {
                     type: 'string',

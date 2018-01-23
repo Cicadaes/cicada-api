@@ -166,6 +166,13 @@
         "createdAt": "2018-01-21T07:33:22.322Z",
         "updatedAt": "2018-01-21T10:33:24.802Z",
         "id": 4
+      },
+      {
+        "name": "o2o",
+        "description": "养气贷",
+        "createdAt": "2018-01-23T15:01:11.214Z",
+        "updatedAt": "2018-01-23T15:01:11.214Z",
+        "id": 6
       }
     ],
     "interface": [
@@ -209,6 +216,28 @@
         "updatedAt": "2018-01-22T17:53:42.834Z",
         "id": 7,
         "responseBodyId": 1
+      },
+      {
+        "projectId": 6,
+        "method": "get",
+        "path": "getSupportCards.do",
+        "desc": "获取支持银行卡列表",
+        "response_body": "{\"code\":0,\"msg\":\"\",\"data\":{\"cards\":[{\"02\":\"招商银行\",\"03\":\"建设银行\"}]}}",
+        "createdAt": "2018-01-23T15:08:26.940Z",
+        "updatedAt": "2018-01-23T15:10:28.997Z",
+        "id": 8,
+        "responseBodyId": 2
+      },
+      {
+        "projectId": 6,
+        "method": "get",
+        "path": "view/detail.do",
+        "desc": "查看详情接口",
+        "response_body": "{\"code\":0,\"msg\":\"\",\"data\":{\"fail\":true}}",
+        "createdAt": "2018-01-23T15:20:00.648Z",
+        "updatedAt": "2018-01-23T15:20:00.708Z",
+        "id": 9,
+        "responseBodyId": 3
       }
     ],
     "response_body": [
@@ -218,6 +247,20 @@
         "createdAt": "2018-01-22T15:23:59.229Z",
         "updatedAt": "2018-01-22T17:53:42.845Z",
         "id": 1
+      },
+      {
+        "interfaceId": 8,
+        "template": "{\"code\":0,\"msg\":\"\",\"data\":{\"cards\":[{\"02\":\"招商银行\",\"03\":\"建设银行\"}]}}",
+        "createdAt": "2018-01-23T15:08:26.965Z",
+        "updatedAt": "2018-01-23T15:10:29.016Z",
+        "id": 2
+      },
+      {
+        "interfaceId": 9,
+        "template": "{\"code\":0,\"msg\":\"\",\"data\":{\"fail\":true}}",
+        "createdAt": "2018-01-23T15:20:00.676Z",
+        "updatedAt": "2018-01-23T15:20:00.676Z",
+        "id": 3
       }
     ]
   },
@@ -257,7 +300,8 @@
       "name": {
         "type": "string",
         "size": 20,
-        "index": true
+        "index": true,
+        "unique": true
       },
       "description": {
         "type": "string",
@@ -336,13 +380,13 @@
       "id": 16
     },
     "project": {
-      "id": 5
+      "id": 6
     },
     "interface": {
-      "id": 7
+      "id": 9
     },
     "response_body": {
-      "id": 1
+      "id": 3
     }
   }
 }
