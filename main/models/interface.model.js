@@ -37,7 +37,8 @@ module.exports = class ProjectModel extends Model {
                     defaultsTo: 0
                 },
                 delay: {
-                    type: 'integer'
+                    type: 'integer',
+                    defaultsTo: 0
                 },
                 responseBodyId: {
                     model: 'response_body',

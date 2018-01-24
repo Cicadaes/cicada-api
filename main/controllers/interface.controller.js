@@ -118,4 +118,15 @@ module.exports = class InterfaceController extends Controller {
             });
         });
     }
+
+    search(req, res) {
+        const Interface = this.app.orm.interface;
+
+        Interface.find().where({projectId: req.params.id}).populate('projectId').sort('path asc').exec((err, records) => {
+            res.render('interface/index', {
+                title: 'Interface manager',
+                interfaces: records
+            });
+        });
+    }
 }

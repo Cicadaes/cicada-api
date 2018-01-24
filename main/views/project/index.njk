@@ -21,7 +21,7 @@
                         <a class="btn btn-primary" href="/project/edit/{{ project.id }}" role="button" data-pjax>Edit</a>
                         <a class="btn btn-primary project-delete" href="javascript:;" role="button"
                             data-id="{{ project.id }}" data-name="{{ project.name }}">Delete</a>
-                        <a class="btn btn-primary" href="#" role="button">Show Interface</a>
+                        <a class="btn btn-primary" href="/interface/search/projectId/{{ project.id }}" role="button">Show Interface</a>
                     </td>
                 </tr>
             {% endfor %}

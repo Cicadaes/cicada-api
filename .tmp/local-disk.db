@@ -280,11 +280,11 @@
         "path": "/test/eee/jj",
         "desc": "fdfdf",
         "response_body": "{\"code|1-4\":[{\"re\":\"uuuu\"}]}",
-        "delay": 3000,
+        "delay": 0,
         "path_regexp": null,
-        "enable_mock": 1,
+        "enable_mock": 0,
         "createdAt": "2018-01-24T15:12:00.369Z",
-        "updatedAt": "2018-01-24T16:03:06.917Z",
+        "updatedAt": "2018-01-24T16:08:41.241Z",
         "id": 14,
         "responseBodyId": 8
       }
@@ -336,7 +336,7 @@
         "interfaceId": 14,
         "template": "{\"code|1-4\":[{\"re\":\"uuuu\"}]}",
         "createdAt": "2018-01-24T15:12:00.406Z",
-        "updatedAt": "2018-01-24T16:03:06.931Z",
+        "updatedAt": "2018-01-24T16:08:41.271Z",
         "id": 8
       }
     ]
@@ -421,7 +421,8 @@
         "defaultsTo": 0
       },
       "delay": {
-        "type": "integer"
+        "type": "integer",
+        "defaultsTo": 0
       },
       "responseBodyId": {
         "type": "integer",

@@ -107,5 +107,11 @@ module.exports = [
         method: 'POST',
         action: 'InterfaceController.delete',
         interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/interface/search/projectId/:id',
+        method: 'GET',
+        action: 'InterfaceController.search',
+        interceptors: ['AuthMiddleware.isAuthenticated']
     }
 ];
