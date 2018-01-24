@@ -273,6 +273,20 @@
         "updatedAt": "2018-01-24T13:50:37.533Z",
         "id": 13,
         "responseBodyId": 7
+      },
+      {
+        "projectId": 6,
+        "method": "get",
+        "path": "/test/eee/jj",
+        "desc": "fdfdf",
+        "response_body": "{\"code|1-4\":[{\"re\":\"uuuu\"}]}",
+        "delay": 3000,
+        "path_regexp": null,
+        "enable_mock": 1,
+        "createdAt": "2018-01-24T15:12:00.369Z",
+        "updatedAt": "2018-01-24T16:03:06.917Z",
+        "id": 14,
+        "responseBodyId": 8
       }
     ],
     "response_body": [
@@ -317,6 +331,13 @@
         "createdAt": "2018-01-24T13:50:37.506Z",
         "updatedAt": "2018-01-24T13:50:37.506Z",
         "id": 7
+      },
+      {
+        "interfaceId": 14,
+        "template": "{\"code|1-4\":[{\"re\":\"uuuu\"}]}",
+        "createdAt": "2018-01-24T15:12:00.406Z",
+        "updatedAt": "2018-01-24T16:03:06.931Z",
+        "id": 8
       }
     ]
   },
@@ -395,6 +416,13 @@
       "desc": {
         "type": "string"
       },
+      "enable_mock": {
+        "type": "integer",
+        "defaultsTo": 0
+      },
+      "delay": {
+        "type": "integer"
+      },
       "responseBodyId": {
         "type": "integer",
         "model": "response_body",
@@ -442,10 +470,10 @@
       "id": 6
     },
     "interface": {
-      "id": 13
+      "id": 14
     },
     "response_body": {
-      "id": 7
+      "id": 8
     }
   }
 }

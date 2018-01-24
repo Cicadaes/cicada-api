@@ -32,6 +32,13 @@ module.exports = class ProjectModel extends Model {
                     type: 'string',
                     required: true
                 },
+                enable_mock: {
+                    type: 'integer',
+                    defaultsTo: 0
+                },
+                delay: {
+                    type: 'integer'
+                },
                 responseBodyId: {
                     model: 'response_body',
                     index: true

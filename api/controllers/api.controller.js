@@ -1,4 +1,5 @@
 const Controller = require('../../lib/base/controller');
+const mockjs = require('mockjs');
 
 module.exports = class ApiController extends Controller {
     // constructor(app) {
@@ -40,32 +41,61 @@ module.exports = class ApiController extends Controller {
             //     });
             // });
             let where = {projectId: projectId, method: method, path: path};
+            let template;
             Interface.count().where(where).exec((err, count) => {
                 if (!err && count == 1) {
                     Interface.findOne().where(where).populate('responseBodyId').exec((err, record) => {
-                        const responser = record.responseBodyId.template;
-                        if (responser) {
-                            return res.json({code: 0, msg: '', data: JSON.parse(record.responseBodyId.template)});
+                        template = record.responseBodyId.template;
+                        if (template) {
+                            template = JSON.parse(template);
+                            if (record.enable_mock) {
+                                template = mockjs.mock(template);
+                            }
+                            if (record.delay && record.delay > 0) {
+                                return setTimeout(() => {
+                                    return res.json({code: 0, msg: '', data: template});
+                                }, record.delay);
+                            } else {
+                                return res.json({code: 0, msg: '', data: template});
+                            }
+                        } else {
+                            return res.json({code: 1, msg: '404, Api not found'});
                         }
-                        return res.json({code: 1, msg: '404, Api not found'});
                     });
                 } else {
                     // Match restful
                     where = {projectId: projectId, method: method, path_regexp: {'!': null}};
-                    Interface.find().where(where).populate('responseBodyId').exec((err, rs) => {
-                        if (err || !rs.length) {
+                    Interface.find().where(where).populate('responseBodyId').exec((err, record) => {
+                        if (err || !record.length) {
                             return res.json({code: 1, msg: '404, Api not found'});
                         }
-                        rs = rs.filter((r) => {
+                        record = record.filter((r) => {
                             let match = new RegExp(decodeURI(r.path_regexp, 'i')).exec(path);
                             if (match) {
                                 return true;
                             }
                         });
-                        if (rs.length === 1) {
-                            return res.json({code: 0, msg: '', data: JSON.parse(rs[0].responseBodyId.template)});
+                        if (record.length === 1) {
+                            record = record[0];
+                            template = record.responseBodyId.template;
+                            if (template) {
+                                template = JSON.parse(template);
+                                if (record.enable_mock) {
+                                    template = mockjs.mock(template);
+                                }
+                                if (record.delay && record.delay > 0) {
+                                    return setTimeout(() => {
+                                        return res.json({code: 0, msg: '', data: template});
+                                    }, record.delay);
+                                } else {
+                                    return res.json({code: 0, msg: '', data: template});
+                                }
+                            } else {
+                                return res.json({code: 1, msg: '404, Api not found'});
+                            }
+                        } else {
+                            return res.json({code: 1, msg: '404, Api not found'});
                         }
-                        return res.json({code: 1, msg: '404, Api not found'});
                     });
                 }
             });

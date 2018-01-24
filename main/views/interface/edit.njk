@@ -82,6 +82,24 @@
                                 <div class="jsoneditor" style="width: 400px; height: 400px;" data-target="#response_body"></div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Enable Mock</label>
+                            <div class="select-group radio-group col-sm-8" data-toggle="buttons">
+                                <label class="btn {% if interface.enable_mock == 1 %}active{% endif %}">
+                                    <input type="radio" name="enable_mock" value=1 autocomplete="off">Yes
+                                </label>
+                                <label class="btn  {% if interface.enable_mock == 0 %}active{% endif %}">
+                                    <input type="radio" name="enable_mock" value=0 autocomplete="off">No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Delay</label>
+                            <div class="col-sm-8">
+                                <input type="tel" name="delay" class="form-control" value="{{ interface.delay }}">
+                                <p class="help-block">timeout response(millisecond)</p>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
