@@ -249,6 +249,30 @@
         "updatedAt": "2018-01-23T16:22:19.329Z",
         "id": 10,
         "responseBodyId": 4
+      },
+      {
+        "projectId": 6,
+        "method": "get",
+        "path": "search/:sex/:age",
+        "desc": "fddfd",
+        "response_body": "{\"code\":1,\"msg\":\"\",\"data\":{\"foo\":\"bar\"}}",
+        "path_regexp": "%5Esearch%5C/(%5B%5E%5C/%5D+?)%5C/(%5B%5E%5C/%5D+?)(?:%5C/)?$",
+        "createdAt": "2018-01-24T13:19:10.539Z",
+        "updatedAt": "2018-01-24T13:21:38.827Z",
+        "id": 12,
+        "responseBodyId": 6
+      },
+      {
+        "projectId": 6,
+        "method": "get",
+        "path": "query/:age/:height",
+        "desc": "ffdfdf",
+        "response_body": "{\"tt\":[5]}",
+        "path_regexp": "%5Equery%5C/(%5B%5E%5C/%5D+?)%5C/(%5B%5E%5C/%5D+?)(?:%5C/)?$",
+        "createdAt": "2018-01-24T13:50:37.475Z",
+        "updatedAt": "2018-01-24T13:50:37.533Z",
+        "id": 13,
+        "responseBodyId": 7
       }
     ],
     "response_body": [
@@ -279,6 +303,20 @@
         "createdAt": "2018-01-23T16:22:19.313Z",
         "updatedAt": "2018-01-23T16:22:19.313Z",
         "id": 4
+      },
+      {
+        "interfaceId": 12,
+        "template": "{\"code\":1,\"msg\":\"\",\"data\":{\"foo\":\"bar\"}}",
+        "createdAt": "2018-01-24T13:19:10.564Z",
+        "updatedAt": "2018-01-24T13:21:38.843Z",
+        "id": 6
+      },
+      {
+        "interfaceId": 13,
+        "template": "{\"tt\":[5]}",
+        "createdAt": "2018-01-24T13:50:37.506Z",
+        "updatedAt": "2018-01-24T13:50:37.506Z",
+        "id": 7
       }
     ]
   },
@@ -351,6 +389,9 @@
       "path": {
         "type": "string"
       },
+      "path_regexp": {
+        "type": "string"
+      },
       "desc": {
         "type": "string"
       },
@@ -401,10 +442,10 @@
       "id": 6
     },
     "interface": {
-      "id": 10
+      "id": 13
     },
     "response_body": {
-      "id": 4
+      "id": 7
     }
   }
 }

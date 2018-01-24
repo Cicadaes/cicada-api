@@ -39,7 +39,7 @@ module.exports = class ApiController extends Controller {
             //         return res.json({code: 1, msg: '', data: JSON.parse(body.template)});
             //     });
             // });
-            const where = {projectId: projectId, method: method, path: path};
+            let where = {projectId: projectId, method: method, path: path};
             Interface.count().where(where).exec((err, count) => {
                 if (!err && count == 1) {
                     Interface.findOne().where(where).populate('responseBodyId').exec((err, record) => {
@@ -47,10 +47,26 @@ module.exports = class ApiController extends Controller {
                         if (responser) {
                             return res.json({code: 0, msg: '', data: JSON.parse(record.responseBodyId.template)});
                         }
-                        return res.json({code: 0, msg: '', data: {}});
+                        return res.json({code: 1, msg: '404, Api not found'});
                     });
                 } else {
-                    return res.json({code: 1, msg: '404, Api not found'});
+                    // Match restful
+                    where = {projectId: projectId, method: method, path_regexp: {'!': null}};
+                    Interface.find().where(where).populate('responseBodyId').exec((err, rs) => {
+                        if (err || !rs.length) {
+                            return res.json({code: 1, msg: '404, Api not found'});
+                        }
+                        rs = rs.filter((r) => {
+                            let match = new RegExp(decodeURI(r.path_regexp, 'i')).exec(path);
+                            if (match) {
+                                return true;
+                            }
+                        });
+                        if (rs.length === 1) {
+                            return res.json({code: 0, msg: '', data: JSON.parse(rs[0].responseBodyId.template)});
+                        }
+                        return res.json({code: 1, msg: '404, Api not found'});
+                    });
                 }
             });
         });

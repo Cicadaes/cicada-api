@@ -1,4 +1,5 @@
 const Controller = require('../../lib/init/main/controller');
+const pathToRegexp = require('path-to-regexp');
 
 module.exports = class InterfaceController extends Controller {
     index(req, res) {
@@ -34,6 +35,16 @@ module.exports = class InterfaceController extends Controller {
         // if (err) {
         //     return  res.json({code: 1, msg: 'Invalid name or description'});
         // }
+
+        let keys = [];
+        let path_regexp = pathToRegexp(req.body.path, keys).toString().substring(1);
+        path_regexp = encodeURI(path_regexp.substring(0, path_regexp.length - 2));
+        if (keys.length > 0) {
+            // i.e. /:name/:age
+            req.body.path_regexp = path_regexp;
+        } else {
+            req.body.path_regexp = null;
+        }
 
         Interface.create(req.body).exec((err, record) => {
             if (err) {

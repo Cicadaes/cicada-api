@@ -25,6 +25,9 @@ module.exports = class ProjectModel extends Model {
                     type: 'string',
                     required: true
                 },
+                path_regexp: {
+                    type: 'string'
+                },
                 desc: {
                     type: 'string',
                     required: true
