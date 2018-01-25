@@ -7,8 +7,7 @@ module.exports = class ProjectController extends Controller {
         Project.find().sort('name asc').exec((err, records) => {
             res.render('project/index', {
                 title: 'Project manager',
-                projects: records,
-                breadcrumb: res.locals.breadcrumb
+                projects: records
             });
         });
     }
