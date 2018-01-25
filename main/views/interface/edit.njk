@@ -115,7 +115,10 @@
         $(document).ready(function () {
             // create the editor
             var $jsoneditors = $(".jsoneditor");
-            var options = {};
+            var options = {
+                mode: 'tree',
+                modes: ['code', 'form', 'text', 'tree', 'view'] // allowed modes
+            };
 
             $jsoneditors.each(function () {
                 var $target = $($(this).data('target'));

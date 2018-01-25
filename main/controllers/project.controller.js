@@ -7,7 +7,8 @@ module.exports = class ProjectController extends Controller {
         Project.find().sort('name asc').exec((err, records) => {
             res.render('project/index', {
                 title: 'Project manager',
-                projects: records
+                projects: records,
+                breadcrumb: res.locals.breadcrumb
             });
         });
     }
@@ -45,7 +46,8 @@ module.exports = class ProjectController extends Controller {
         Project.findOne({id: id}).exec((err, record) => {
             if (record) {
                 return res.render('project/edit', {
-                    project: record
+                    project: record,
+                    breadcrumb: res.locals.breadcrumb
                 });
             } else {
                 res.end('Not found');

@@ -1,4 +1,14 @@
 <ol class="breadcrumb">
-    <li><a href="/project" data-pjax>project</a></li>
-    <li class="active">list</li>
+    {% set excludeBC = [
+        'edit',
+        'search',
+        'projectId'
+    ] %}
+    {% for bc in breadcrumb %}
+        {% if (excludeBC.indexOf(bc.name) > -1 or loop.last) %}
+            <li class="active">{{ bc.name }}</li>
+        {% else %}
+            <li><a href="{{ bc.url }}" data-pjax>{{ bc.name }}</a></li>
+        {% endif %}
+    {% endfor %}
 </ol>

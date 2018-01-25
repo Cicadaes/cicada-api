@@ -82,7 +82,7 @@
                 $('#apiForm').ajaxForm({
                     dataType: 'json',
                     success: function(data, statusText, xhr, form) {
-                        alert(JSON.stringify(data));
+                        alert(JSON.stringify(data, null, 4));
                     }
                 }).submit();
             });
