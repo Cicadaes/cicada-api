@@ -12,10 +12,30 @@ module.exports = class UserController extends Controller {
         //     console.log(record);
         //     if (err) return res.status(500).json(err);
         // });
-        this.app.orm.user.find({}).then((records) => {
-            res.render('user/index', {
-                title: 'User',
-                users: records
+        this.app.orm.user.count().then((count) => {
+            let page = Number(typeof req.query.page === 'undefined' ? 1 : req.query.page);
+            let limit = 5;
+            let pages = 0;
+            let skip;
+            // Total page
+            pages = Math.ceil(count / limit);
+            page = page < 1 ? 1 : page;
+            page = page > pages ? pages : page;
+            skip = (page - 1) * limit;
+
+            this.app.orm.user
+                .find({})
+                .limit(limit)
+                .skip(skip)
+                .then((records) => {
+                    res.render('user/index', {
+                        title: 'User',
+                        users: records,
+                        count: count,
+                        pages: pages,
+                        page: page,
+                        limit: limit
+                    });
             });
         });
     }

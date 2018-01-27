@@ -5,10 +5,31 @@ module.exports = class InterfaceController extends Controller {
     index(req, res) {
         const Interface = this.app.orm.interface;
 
-        Interface.find().populate('projectId').sort('path asc').exec((err, records) => {
-            res.render('interface/index', {
-                title: 'Interface manager',
-                interfaces: records
+        Interface.count().then((count) => {
+            let page = Number(typeof req.query.page === 'undefined' ? 1 : req.query.page);
+            let limit = 5;
+            let pages = 0;
+            let skip;
+            // Total page
+            pages = Math.ceil(count / limit);
+            page = page < 1 ? 1 : page;
+            page = page > pages ? pages : page;
+            skip = (page - 1) * limit;
+
+            Interface.find()
+                .populate('projectId')
+                .sort('path asc')
+                .limit(limit)
+                .skip(skip)
+                .exec((err, records) => {
+                res.render('interface/index', {
+                    title: 'Interface manager',
+                    interfaces: records,
+                    count: count,
+                    pages: pages,
+                    page: page,
+                    limit: limit
+                });
             });
         });
     }

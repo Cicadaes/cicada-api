@@ -31,6 +31,17 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <div class="flex flex-center-h">
+        <div class="pagination" style="line-height:34px;flex:1;">共有 {{ count }} 条数据，每页显示 {{ limit }} 条；共 {{ pages }} 页；当前第 {{ page }} 页</div>
+        <ul class="pagination">
+            <li><a href="/interface?page={% if page - 1 < 1 %}1{% else %}{{ page - 1 }}{% endif %}" data-pjax>&laquo;</a></li>
+            {% for i in range(1, pages+1) %}
+                <li><a href="/interface?page={{ i }}" {% if i == page %} style="background-color:#eee;" {% endif %} data-pjax>{{ i }}</a></li>
+            {% endfor %}
+            <li><a href="/interface?page={% if page + 1 > pages %}{{ pages }}{% else %}{{ page + 1 }}{% endif %}" data-pjax>&raquo;</a></li>
+        </ul>
+    </div>
     
     <a class="btn btn-primary hide" data-toggle="modal" href='#modal-interface-delete'>Trigger modal</a>
     <div class="modal fade" id="modal-interface-delete">

@@ -4,10 +4,30 @@ module.exports = class ProjectController extends Controller {
     index(req, res) {
         const Project = this.app.orm.project;
 
-        Project.find().sort('name asc').exec((err, records) => {
-            res.render('project/index', {
-                title: 'Project manager',
-                projects: records
+        Project.count().then((count) => {
+            let page = Number(typeof req.query.page === 'undefined' ? 1 : req.query.page);
+            let limit = 5;
+            let pages = 0;
+            let skip;
+            // Total page
+            pages = Math.ceil(count / limit);
+            page = page < 1 ? 1 : page;
+            page = page > pages ? pages : page;
+            skip = (page - 1) * limit;
+
+            Project.find()
+                .sort('name asc')
+                .limit(limit)
+                .skip(skip)
+                .exec((err, records) => {
+                res.render('project/index', {
+                    title: 'Project manager',
+                    projects: records,
+                    count: count,
+                    pages: pages,
+                    page: page,
+                    limit: limit
+                });
             });
         });
     }
