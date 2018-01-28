@@ -73,6 +73,12 @@ module.exports = [
         interceptors: ['AuthMiddleware.isAuthenticated']
     },
     {
+        path: '/project/deletes',
+        method: 'POST',
+        action: 'ProjectController.deletes',
+        interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
         path: '/interface',
         method: 'GET',
         action: 'InterfaceController.index',
@@ -106,6 +112,12 @@ module.exports = [
         path: '/interface/delete/:id',
         method: 'POST',
         action: 'InterfaceController.delete',
+        interceptors: ['AuthMiddleware.isAuthenticated']
+    },
+    {
+        path: '/interface/deletes',
+        method: 'POST',
+        action: 'InterfaceController.deletes',
         interceptors: ['AuthMiddleware.isAuthenticated']
     },
     {

@@ -1,10 +1,14 @@
 {% extends 'layouts/base.njk'  %}
 
 {% block content %}
-    <a class="btn btn-primary pull-right" href="/project/add" role="button" data-pjax>Add project</a>
+    <a class="btn btn-danger pull-left deletes" href="javascript:;" role="button">X Delete project</a>
+    <a class="btn btn-primary pull-right" href="/project/add" role="button" data-pjax>+ Add project</a>
     <table class="table table-hover" id="project-table">
         <thead>
             <tr>
+                <th>
+                    <input class="selectAll" type="checkbox" name="" value="">
+                </th>
                 <th>id</th>
                 <th>name</th>
                 <th>description</th>
@@ -14,6 +18,7 @@
         <tbody>
             {% for project in projects %}
                 <tr>
+                    <td><input type="checkbox" value="{{ project.id }}" name=""></td>
                     <td>{{ project.id }}</td>
                     <td>{{ project.name }}</td>
                     <td>{{ project.description }}</td>
@@ -78,6 +83,41 @@
                         }
                     });
                 });
+            });
+
+            $('.selectAll').on('click', function () {
+                var checked = this.checked;
+                $.each($('input[type=checkbox], tbody'), function (i, item) {
+                    this.checked = checked;
+                });
+            });
+
+            $('.deletes').on('click', function () {
+                var ids = [];
+                
+                $.each($('input[type=checkbox], tbody'), function () {
+                    if ($(this).is(':checked')) {
+                        ids.push($(this).val());
+                    }
+                });
+
+                var confirmed = confirm("Are you sure?");
+                if (confirmed) {
+                    $.ajax({
+                        url: '/project/deletes',
+                        type: 'POST',
+                        data: {
+                            ids: ids
+                        },
+                        success: function (res) {
+                            if (res.code === 0) {
+                                alert('删除成功！')
+                            } else {
+                                alert('res.msg');
+                            }
+                        }
+                    })
+                }
             });
         });
     </script>

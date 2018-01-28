@@ -1,10 +1,14 @@
 {% extends 'layouts/base.njk'  %}
 
 {% block content %}
-    <a class="btn btn-primary pull-right" href="/interface/add" role="button" data-pjax>Add Interface</a>
+    <a class="btn btn-danger pull-left deletes" href="javascript:;" role="button">X Interface</a>
+    <a class="btn btn-primary pull-right" href="/interface/add" role="button" data-pjax>+ Add Interface</a>
     <table class="table table-hover" id="interface-table">
         <thead>
             <tr>
+                <th>
+                    <input class="selectAll" type="checkbox" name="" value="">
+                </th>
                 <th>id</th>
                 <th>project name</th>
                 <th>method</th>
@@ -16,6 +20,7 @@
         <tbody>
             {% for interface in interfaces %}
                 <tr>
+                    <td><input type="checkbox" value="{{ interface.id }}" name=""></td>
                     <td>{{ interface.id }}</td>
                     <td>{{ interface.projectId.name }}</td>
                     <td>{{ interface.method }}</td>
@@ -96,6 +101,41 @@
                         alert(JSON.stringify(data, null, 4));
                     }
                 }).submit();
+            });
+
+            $('.selectAll').on('click', function () {
+                var checked = this.checked;
+                $.each($('input[type=checkbox], tbody'), function (i, item) {
+                    this.checked = checked;
+                });
+            });
+
+            $('.deletes').on('click', function () {
+                var ids = [];
+                
+                $.each($('input[type=checkbox], tbody'), function () {
+                    if ($(this).is(':checked')) {
+                        ids.push($(this).val());
+                    }
+                });
+
+                var confirmed = confirm("Are you sure?");
+                if (confirmed) {
+                    $.ajax({
+                        url: '/interface/deletes',
+                        type: 'POST',
+                        data: {
+                            ids: ids
+                        },
+                        success: function (res) {
+                            if (res.code === 0) {
+                                alert('删除成功！')
+                            } else {
+                                alert('res.msg');
+                            }
+                        }
+                    })
+                }
             });
         });
     </script>

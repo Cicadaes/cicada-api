@@ -140,6 +140,19 @@ module.exports = class InterfaceController extends Controller {
         });
     }
 
+    deletes(req, res) {
+        const Interface = this.app.orm.interface;
+        const ids = req.body.ids;
+
+        Interface.destroy({id: ids}).exec((err) => {
+            if (err) {
+                return res.json({code: 1, msg: 'Delete fail'});
+            } else {
+                return res.json({code: 0, msg: 'Delete success'});
+            }
+        })
+    }
+
     search(req, res) {
         const Interface = this.app.orm.interface;
 

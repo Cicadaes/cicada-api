@@ -108,4 +108,17 @@ module.exports = class ProjectController extends Controller {
             });
         });
     }
+
+    deletes(req, res) {
+        const Project = this.app.orm.project;
+        const ids = req.body.ids;
+
+        Project.destroy({id: ids}).exec((err) => {
+            if (err) {
+                return res.json({code: 1, msg: 'Delete fail'});
+            } else {
+                return res.json({code: 0, msg: 'Delete success'});
+            }
+        })
+    }
 }
