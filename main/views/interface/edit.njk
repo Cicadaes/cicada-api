@@ -138,7 +138,11 @@
             // });
 
             $('#interfaceForm').ajaxForm({
+                method: 'POST',
                 dataType: 'json',
+                headers: {
+                    'x-access-token': localStorage['api-token']
+                },
                 beforeSerialize: function (form, options) {
                     $jsoneditors.each(function () {
                         var $textarea = $($(this).data('target'));

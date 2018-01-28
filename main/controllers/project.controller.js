@@ -15,6 +15,7 @@ module.exports = class ProjectController extends Controller {
             page = page > pages ? pages : page;
             skip = (page - 1) * limit;
 
+            // .paginate({page: page, limit: limit})
             Project.find()
                 .sort('name asc')
                 .limit(limit)

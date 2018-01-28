@@ -82,7 +82,7 @@ module.exports = [
         path: '/interface',
         method: 'GET',
         action: 'InterfaceController.index',
-        interceptors: ['AuthMiddleware.isAuthenticated']
+        interceptors: []
     },
     {
         path: '/interface/add',
@@ -100,13 +100,13 @@ module.exports = [
         path: '/interface/edit/:id',
         method: 'GET',
         action: 'InterfaceController.getEdit',
-        interceptors: ['AuthMiddleware.isAuthenticated']
+        interceptors: []
     },
     {
         path: '/interface/edit/:id',
         method: 'POST',
         action: 'InterfaceController.postEdit',
-        interceptors: ['AuthMiddleware.isAuthenticated']
+        interceptors: ['AuthMiddleware.isToken']
     },
     {
         path: '/interface/delete/:id',

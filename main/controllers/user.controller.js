@@ -58,7 +58,11 @@ module.exports = class UserController extends Controller {
                 if (err) {
                     return next(err);
                 }
-                res.redirect('/');
+                // res.redirect('/');
+                const UserModel = this.app.main.models.UserModel;
+                const token = UserModel.generateJwt();
+
+                res.json({code: 0, msg: '', token: token});
             })
         })(req, res, next);
     }
@@ -95,7 +99,10 @@ module.exports = class UserController extends Controller {
                     if (err) {
                         return next(err);
                     }
-                    res.redirect('/');
+                    const UserModel = app.main.models.UserModel;
+                    const token = UserModel.generateJwt();
+
+                    res.json({code: 0, msg: '', token: token});
                 })
             });
         })

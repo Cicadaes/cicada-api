@@ -1,3 +1,4 @@
 {
-    "port": 4040
+    "port": 4040,
+    "JWT_SECRET": "CicadaApiSecret"
 }

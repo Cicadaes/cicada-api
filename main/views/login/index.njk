@@ -8,7 +8,7 @@
                         <h2>Login</h2>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" method="POST" action="login">
+                        <form id="loginForm" class="form-horizontal" method="POST" action="login">
                             <div class="form-group">
                                 <label for="email" class="col-md-2 control-label">Email</label>
                                 <div class="col-md-10">
@@ -38,4 +38,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#loginForm').ajaxForm({
+            method: 'POST',
+            dataType: 'json',
+            success: function(data, statusText, xhr, form) {
+                if (data.code == 0) {
+                    localStorage['api-token'] = data.token;
+                    window.location.href = '/';
+                } else {
+                    toastr.error(data.msg);
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}
