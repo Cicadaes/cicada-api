@@ -51,6 +51,9 @@ module.exports = class UserController extends Controller {
             if (err) {
                 return next(err);
             }
+            if (info) {
+                return next(info);
+            }
             if (!user) {
                 return res.redirect('/login');
             }
@@ -60,7 +63,7 @@ module.exports = class UserController extends Controller {
                 }
                 // res.redirect('/');
                 const UserModel = this.app.main.models.UserModel;
-                const token = UserModel.generateJwt();
+                const token = UserModel.generateJwt(user.username, user.email);
 
                 res.json({code: 0, msg: '', token: token});
             })
@@ -99,8 +102,8 @@ module.exports = class UserController extends Controller {
                     if (err) {
                         return next(err);
                     }
-                    const UserModel = app.main.models.UserModel;
-                    const token = UserModel.generateJwt();
+                    const UserModel = this.app.main.models.UserModel;
+                    const token = UserModel.generateJwt(user.username, user.email);
 
                     res.json({code: 0, msg: '', token: token});
                 })
@@ -116,6 +119,6 @@ module.exports = class UserController extends Controller {
      */
     logout(req, res) {
         req.logout();
-        res.redirect('/');
+        res.json({code: 0, msg: 'Logout success'});
     }
 }

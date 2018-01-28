@@ -50,17 +50,14 @@ module.exports = class UserModel extends Model {
         return hash === _hash;
     }
 
-    generateJwt() {
-        const expiry = new Date();
+    generateJwt(username, email) {
         const config = new Config().config;
 
-        expiry.setDate(expiry.getDate() + 7);
-
         return jwt.sign({
-           id: this.id,
-           email: this.email,
-           username: this.username,
-           exp: parseInt(expiry.getTime()/1000, config.JWT_SECRET)
-        }, config.JWT_SECRET);
+           email: email,
+           username: username
+        }, config.JWT_SECRET, {
+            expiresIn: 60*60*24  // 24 hour expires
+        });
     }
 };

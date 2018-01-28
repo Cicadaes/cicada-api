@@ -27,5 +27,23 @@
                 }, 250);
             });
         }
+
+        if (localStorage['api-token']) {
+            var decode = JSON.parse(window.atob(localStorage['api-token'].split('.')[1]));
+            $('#token-username').text(decode.username);
+        }
+        $('#token-logout').on('click', function () {
+            $.ajax({
+                url: '/logout',
+                type: 'GET',
+                success: function (res) {
+                    if (res.code === 0) {
+                        localStorage.removeItem('api-token');
+                        location.href = '/login';
+                    }
+                }
+            })
+            localStorage.removeItem('api-token');
+        })
     });
 })(jQuery);

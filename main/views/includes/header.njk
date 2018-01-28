@@ -13,10 +13,10 @@
         <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
             <div class="nav navbar-nav navbar-right">
                 <div style="line-height:50px;padding-left:15px;padding-right:15px">
-                    <button type="button" class="btn btn-primary" style="width:100%" onclick="window.location.href='/logout'">Log out</button>
+                    <button id="token-logout" type="button" class="btn btn-primary" style="width:100%">Log out</button>
                 </div>
             </div>
-            <div class="nav navbar-nav navbar-right" style="line-height:50px;color:#ffffff">{{ user.username }}</div>
+            <div id="token-username" class="nav navbar-nav navbar-right" style="line-height:50px;color:#ffffff"></div>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search..." />
             </form>

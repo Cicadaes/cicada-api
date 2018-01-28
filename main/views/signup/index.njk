@@ -8,7 +8,7 @@
                         <h2>Sign up</h2>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" method="POST" action="/signup">
+                        <form id="signupForm" class="form-horizontal" method="POST" action="/signup">
                             <div class="form-group">
                                 <label for="username" class="col-md-2 control-label">Username</label>
                                 <div class="col-md-10">
@@ -49,4 +49,21 @@
         </div>
     </div>
 </div>
+
+<script>
+        $(document).ready(function () {
+            $('#signupForm').ajaxForm({
+                method: 'POST',
+                dataType: 'json',
+                success: function(data, statusText, xhr, form) {
+                    if (data.code == 0) {
+                        localStorage['api-token'] = data.token;
+                        window.location.href = '/';
+                    } else {
+                        toastr.error(data.msg);
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock %}
