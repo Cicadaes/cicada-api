@@ -43,6 +43,11 @@ module.exports = class ProjectModel extends Model {
                 responseBodyId: {
                     model: 'response_body',
                     index: true
+                },
+                createBy: {
+                    type: 'string',
+                    required: true,
+                    index: true
                 }
             }
         }

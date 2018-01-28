@@ -10,11 +10,126 @@
         "salt": "d374737848a9de6c13d877220c6dbc18",
         "hash": "66fadc9f05bedac16cc52fa47a85d621a7143845f2be07268640da8ce975d6dd69c07b05b05287d1f8b7eb5a6c5687cfb19a2f33dfb187bf386f5def5eda51a7",
         "id": 24
+      },
+      {
+        "username": "test2",
+        "email": "test2@test.com",
+        "password": "111111",
+        "confirmPassword": "111111",
+        "createdAt": "January 28th 2018",
+        "salt": "2e2463a2a4e496d1a1d4facdac8ffbb6",
+        "hash": "44630f08d2be10d7af631de7b5253b1948cf3ef043f3d431473e274d1c8505458670a6a14c315ff8069045fba8a120b417b2f899443b79de06c5afe6b30380bf",
+        "id": 25
       }
     ],
-    "project": [],
-    "interface": [],
-    "response_body": []
+    "project": [
+      {
+        "name": "upreloan",
+        "description": "222",
+        "createBy": "24",
+        "createdAt": "2018-01-28T13:55:14.139Z",
+        "updatedAt": "2018-01-28T15:50:06.516Z",
+        "id": 8
+      },
+      {
+        "name": "o2o",
+        "description": "4444444444",
+        "createBy": "25",
+        "createdAt": "2018-01-28T13:56:54.137Z",
+        "updatedAt": "2018-01-28T13:56:54.137Z",
+        "id": 9
+      }
+    ],
+    "interface": [
+      {
+        "projectId": 8,
+        "method": "post",
+        "path": "getUserInfo.do",
+        "desc": "eeeeee",
+        "response_body": "{\"code\":0,\"msg\":\"upreloan\"}",
+        "delay": 0,
+        "path_regexp": null,
+        "enable_mock": 0,
+        "createdAt": "2018-01-28T14:08:01.182Z",
+        "updatedAt": "2018-01-28T14:08:01.215Z",
+        "id": 16,
+        "responseBodyId": 10
+      },
+      {
+        "projectId": 9,
+        "method": "get",
+        "path": "bindCard.do",
+        "desc": "4444",
+        "response_body": "{\"code\":0,\"msg\":\"o2o\"}",
+        "delay": 0,
+        "path_regexp": null,
+        "enable_mock": 0,
+        "createdAt": "2018-01-28T14:48:55.910Z",
+        "updatedAt": "2018-01-28T14:48:55.948Z",
+        "id": 17,
+        "responseBodyId": 11
+      },
+      {
+        "projectId": 8,
+        "method": "get",
+        "path": "yyyyy",
+        "desc": "yyyyyyy",
+        "response_body": "{}",
+        "delay": 0,
+        "path_regexp": null,
+        "createBy": "24",
+        "enable_mock": 0,
+        "createdAt": "2018-01-28T15:35:39.476Z",
+        "updatedAt": "2018-01-28T15:50:40.331Z",
+        "id": 18,
+        "responseBodyId": 12
+      },
+      {
+        "projectId": 9,
+        "method": "post",
+        "path": "uuuu",
+        "desc": "uuuuuuuuu",
+        "response_body": "{}",
+        "delay": 0,
+        "path_regexp": null,
+        "createBy": "25",
+        "enable_mock": 0,
+        "createdAt": "2018-01-28T15:51:59.085Z",
+        "updatedAt": "2018-01-28T15:51:59.113Z",
+        "id": 19,
+        "responseBodyId": 13
+      }
+    ],
+    "response_body": [
+      {
+        "interfaceId": 16,
+        "template": "{\"code\":0,\"msg\":\"upreloan\"}",
+        "createdAt": "2018-01-28T14:08:01.202Z",
+        "updatedAt": "2018-01-28T14:08:01.202Z",
+        "id": 10
+      },
+      {
+        "interfaceId": 17,
+        "template": "{\"code\":0,\"msg\":\"o2o\"}",
+        "createdAt": "2018-01-28T14:48:55.927Z",
+        "updatedAt": "2018-01-28T14:48:55.927Z",
+        "id": 11
+      },
+      {
+        "interfaceId": 18,
+        "template": "{}",
+        "createdAt": "2018-01-28T15:35:45.878Z",
+        "updatedAt": "2018-01-28T15:50:40.349Z",
+        "id": 12
+      },
+      {
+        "interfaceId": 19,
+        "template": "{}",
+        "createdAt": "2018-01-28T15:51:59.103Z",
+        "updatedAt": "2018-01-28T15:51:59.103Z",
+        "id": 13
+      }
+    ]
   },
   "schema": {
     "user": {
@@ -58,6 +173,10 @@
       "description": {
         "type": "string",
         "size": 100
+      },
+      "createBy": {
+        "type": "string",
+        "index": true
       },
       "createdAt": {
         "type": "datetime"
@@ -106,6 +225,10 @@
         "alias": "responseBodyId",
         "index": true
       },
+      "createBy": {
+        "type": "string",
+        "index": true
+      },
       "createdAt": {
         "type": "datetime"
       },
@@ -140,16 +263,16 @@
   },
   "counters": {
     "user": {
-      "id": 24
+      "id": 25
     },
     "project": {
-      "id": 7
+      "id": 10
     },
     "interface": {
-      "id": 15
+      "id": 19
     },
     "response_body": {
-      "id": 9
+      "id": 13
     }
   }
 }

@@ -5,6 +5,45 @@ const jwt = require('jsonwebtoken');
 const Model = require('../../lib/base/model');
 const Config = require('../../lib/config');
 
+// User Model
+// {
+//     attributes: {
+//         emailAddress: 'string',
+
+//         // Accounts owned by the user
+//         ownedAccounts: {
+//             collection: 'account',
+//             via: 'owner'
+//         },
+
+//         // All associated accounts
+//         accounts: {
+//             collection: 'account',
+//             via: 'users'
+//         }
+//     }
+// }
+// Account Model
+// {
+//     attributes: {
+//         name: 'string',
+
+//         // Owner foreign key
+//         owner: {
+//             model: 'user'
+//         },
+
+//         users: {
+//             collection: 'user',
+//             via: 'accounts'
+//         }
+//     }
+// }
+// Then you can simply use the following query:
+
+// User.findOneByEmailAddress('user@acme.com')
+// .populate('ownedAccounts')
+
 module.exports = class UserModel extends Model {
     schema() {
         return {
@@ -35,7 +74,7 @@ module.exports = class UserModel extends Model {
                     defaultsTo: function () {
                         return moment().format('MMMM Do YYYY');
                     }
-                }
+                },
             },
             beforeCreate(values, cb) {
                 values.salt = crypto.randomBytes(16).toString('hex');

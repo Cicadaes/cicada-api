@@ -4,7 +4,9 @@ module.exports = class ProjectController extends Controller {
     index(req, res) {
         const Project = this.app.orm.project;
 
-        Project.count().then((count) => {
+        Project.count().where({
+            createBy: req.user[0].id
+        }).then((count) => {
             let page = Number(typeof req.query.page === 'undefined' ? 1 : req.query.page);
             let limit = 5;
             let pages = 0;
@@ -17,6 +19,9 @@ module.exports = class ProjectController extends Controller {
 
             // .paginate({page: page, limit: limit})
             Project.find()
+                .where({
+                    createBy: req.user[0].id
+                })
                 .sort('name asc')
                 .limit(limit)
                 .skip(skip)
@@ -50,6 +55,7 @@ module.exports = class ProjectController extends Controller {
         if (err) {
             return  res.json({code: 1, msg: 'Invalid name or description'});
         }
+        req.body.createBy = req.user[0].id;
 
         Project.create(req.body).exec((err, p) => {
             if (err) {
@@ -87,6 +93,7 @@ module.exports = class ProjectController extends Controller {
         if (err) {
             return res.json({code: 1, msg: 'Invalid name or description'});
         }
+        req.body.createBy = req.user[0].id;
 
         Project.update({id: id}, req.body).exec((err, record) => {
             if (err || !record) {

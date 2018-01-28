@@ -25,6 +25,11 @@ module.exports = class ProjectModel extends Model {
                     type: 'string',
                     size: 100
                 },
+                createBy: {
+                    type: 'string',
+                    required: true,
+                    index: true
+                },
                 interfaces: {
                   collection: 'interface',
                   via: 'projectId'

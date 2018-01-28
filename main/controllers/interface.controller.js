@@ -5,7 +5,9 @@ module.exports = class InterfaceController extends Controller {
     index(req, res) {
         const Interface = this.app.orm.interface;
 
-        Interface.count().then((count) => {
+        Interface.count().where({
+            createBy: req.user[0].id
+        }).then((count) => {
             let page = Number(typeof req.query.page === 'undefined' ? 1 : req.query.page);
             let limit = 5;
             let pages = 0;
@@ -17,27 +19,30 @@ module.exports = class InterfaceController extends Controller {
             skip = (page - 1) * limit;
 
             Interface.find()
+                .where({
+                    createBy: req.user[0].id
+                })
                 .populate('projectId')
                 .sort('path asc')
                 .limit(limit)
                 .skip(skip)
                 .exec((err, records) => {
-                res.render('interface/index', {
-                    title: 'Interface manager',
-                    interfaces: records,
-                    count: count,
-                    pages: pages,
-                    page: page,
-                    limit: limit
-                });
+                    return res.render('interface/index', {
+                        title: 'Interface manager',
+                        interfaces: records,
+                        count: count,
+                        pages: pages,
+                        page: page,
+                        limit: limit
+                    });
             });
         });
     }
 
-    getAdd(rea, res) {
+    getAdd(req, res) {
         const Project = this.app.orm.project;
 
-        Project.find().exec((err, records) => {
+        Project.find().where({createBy: req.user[0].id}).exec((err, records) => {
             res.render('interface/add', {
                 title: 'Add interface',
                 projects: records
@@ -66,6 +71,7 @@ module.exports = class InterfaceController extends Controller {
         } else {
             req.body.path_regexp = null;
         }
+        req.body.createBy = req.user[0].id;
 
         Interface.create(req.body).exec((err, record) => {
             if (err) {
@@ -92,7 +98,7 @@ module.exports = class InterfaceController extends Controller {
         const Project = this.app.orm.project;
         const id = req.params.id;
 
-        Project.find().exec((err, projects) => {
+        Project.find().where({createBy: req.user[0].id}).exec((err, projects) => {
             
             Interface.findOne({id: id}).populate('projectId').populate('responseBodyId').exec((err, record) => {
                 if (record) {
@@ -109,6 +115,8 @@ module.exports = class InterfaceController extends Controller {
 
     postEdit(req, res) {
         const Interface = this.app.orm.interface;
+
+        req.body.createBy = req.user[0].id;
 
         Interface.update({id: req.params.id}, req.body).exec((err, record) => {
             if (err) {
