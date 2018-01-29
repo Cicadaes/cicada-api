@@ -9,7 +9,7 @@ module.exports = class InterfaceController extends Controller {
             createBy: req.user[0].id
         }).then((count) => {
             let page = Number(typeof req.query.page === 'undefined' ? 1 : req.query.page);
-            let limit = 5;
+            let limit = 10;
             let pages = 0;
             let skip;
             // Total page
